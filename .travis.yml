@@ -3,7 +3,7 @@ matrix:
 
     # Flutter Android build
     - name: "Flutter Android"
-      if: branch IN (master, mobile-development)
+      if: branch IN (master, develop, release)
       os: linux
       dist: xenial
       language: android
@@ -54,7 +54,7 @@ matrix:
     - name: "Flutter iOS"
       os: osx
       language: generic
-      if: branch IN (master, mobile-development)
+      if: branch IN (master, develop, release)
       env:
         global:
           - IS_COMMIT=["$TRAVIS_PULL_REQUEST" = "false"]
@@ -84,3 +84,10 @@ matrix:
         - flutter clean
         - flutter test
         - travis_wait 30 flutter build ios --release --no-codesign --build-number=$TRAVIS_BUILD_NUMBER
+
+cache:
+  directories:
+    - $HOME/.pub-cache
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
