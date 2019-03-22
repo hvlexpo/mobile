@@ -1,0 +1,21 @@
+.DS_Store
+.dart_tool/
+
+.packages
+.pub/
+.vscode/
+.idea/
+
+build/
+
+.flutter-plugins
+.env.dart
+
+bin/
+
+# firebase
+google-services.json
+
+# eclipse 😤
+org.eclipse.buildship.core.prefs
+.project
