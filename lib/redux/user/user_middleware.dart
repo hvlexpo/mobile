@@ -1,11 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:redux/redux.dart';
-import 'package:expo/ui/user/user_screen.dart';
+import 'package:expo/utils/routes.dart';
 import 'package:expo/data/models/models.dart';
 import 'package:expo/redux/user/user_actions.dart';
 import 'package:expo/redux/ui/ui_actions.dart';
-import 'package:expo/ui/user/edit/user_edit_vm.dart';
-import 'package:expo/ui/user/view/user_view_vm.dart';
 import 'package:expo/redux/app/app_state.dart';
 import 'package:expo/data/repositories/user_repository.dart';
 
@@ -33,8 +31,8 @@ Middleware<AppState> _viewUserList() {
   return (Store<AppState> store, action, NextDispatcher next) {
     next(action);
 
-    store.dispatch(UpdateCurrentRoute(UserScreen.route));
-    Navigator.of(action.context).pushReplacementNamed(UserScreen.route);
+    store.dispatch(UpdateCurrentRoute(Routes.user));
+    Navigator.of(action.context).pushReplacementNamed(Routes.user);
   };
 }
 
@@ -42,8 +40,8 @@ Middleware<AppState> _viewUser() {
   return (Store<AppState> store, action, NextDispatcher next) {
     next(action);
 
-    store.dispatch(UpdateCurrentRoute(UserViewScreen.route));
-    Navigator.of(action.context).pushNamed(UserViewScreen.route);
+    store.dispatch(UpdateCurrentRoute(Routes.userView));
+    Navigator.of(action.context).pushNamed(Routes.userView);
   };
 }
 
@@ -51,8 +49,8 @@ Middleware<AppState> _editUser() {
   return (Store<AppState> store, action, NextDispatcher next) {
     next(action);
 
-    store.dispatch(UpdateCurrentRoute(UserEditScreen.route));
-    Navigator.of(action.context).pushNamed(UserEditScreen.route);
+    store.dispatch(UpdateCurrentRoute(Routes.userEdit));
+    Navigator.of(action.context).pushNamed(Routes.userEdit);
   };
 }
 

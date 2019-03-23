@@ -1,13 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:redux/redux.dart';
-import 'package:expo/ui/exhibition/exhibition_screen.dart';
 import 'package:expo/data/models/models.dart';
 import 'package:expo/redux/exhibition/exhibition_actions.dart';
 import 'package:expo/redux/ui/ui_actions.dart';
-import 'package:expo/ui/exhibition/edit/exhibition_edit_vm.dart';
-import 'package:expo/ui/exhibition/view/exhibition_view_vm.dart';
 import 'package:expo/redux/app/app_state.dart';
 import 'package:expo/data/repositories/exhibition_repository.dart';
+import 'package:expo/utils/routes.dart';
 
 List<Middleware<AppState>> createStoreExhibitionsMiddleware([
   ExhibitionRepository repository = const ExhibitionRepository(),
@@ -33,8 +31,8 @@ Middleware<AppState> _viewExhibitionList() {
   return (Store<AppState> store, action, NextDispatcher next) {
     next(action);
 
-    store.dispatch(UpdateCurrentRoute(ExhibitionScreen.route));
-    Navigator.of(action.context).pushReplacementNamed(ExhibitionScreen.route);
+    store.dispatch(UpdateCurrentRoute(Routes.exhibition));
+    Navigator.of(action.context).pushReplacementNamed(Routes.exhibition);
   };
 }
 
@@ -42,8 +40,8 @@ Middleware<AppState> _viewExhibition() {
   return (Store<AppState> store, action, NextDispatcher next) {
     next(action);
 
-    store.dispatch(UpdateCurrentRoute(ExhibitionViewScreen.route));
-    Navigator.of(action.context).pushNamed(ExhibitionViewScreen.route);
+    store.dispatch(UpdateCurrentRoute(Routes.exhibitionView));
+    Navigator.of(action.context).pushNamed(Routes.exhibitionView);
   };
 }
 
@@ -51,8 +49,8 @@ Middleware<AppState> _editExhibition() {
   return (Store<AppState> store, action, NextDispatcher next) {
     next(action);
 
-    store.dispatch(UpdateCurrentRoute(ExhibitionEditScreen.route));
-    Navigator.of(action.context).pushNamed(ExhibitionEditScreen.route);
+    store.dispatch(UpdateCurrentRoute(Routes.exhibitionEdit));
+    Navigator.of(action.context).pushNamed(Routes.exhibitionEdit);
   };
 }
 

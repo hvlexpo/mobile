@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/theme.dart';
 import 'qr_reader.dart';
-import 'package:meta/meta.dart';
 
 class ScannerPage extends StatefulWidget {
 

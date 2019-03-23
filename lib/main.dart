@@ -15,12 +15,14 @@ import 'package:expo/ui/user/edit/user_edit_vm.dart';
 import 'package:expo/ui/user/view/user_view_vm.dart';
 import 'package:expo/redux/user/user_actions.dart';
 import 'package:expo/redux/user/user_middleware.dart';
-
 import 'package:expo/ui/exhibition/exhibition_screen.dart';
 import 'package:expo/ui/exhibition/edit/exhibition_edit_vm.dart';
 import 'package:expo/ui/exhibition/view/exhibition_view_vm.dart';
 import 'package:expo/redux/exhibition/exhibition_actions.dart';
 import 'package:expo/redux/exhibition/exhibition_middleware.dart';
+import 'package:expo/ui/app/app_builder.dart';
+
+import 'package:expo/utils/routes.dart';
 
 void main() {
   final store = Store<AppState>(appReducer,
@@ -51,28 +53,33 @@ class _ExpoAppState extends State<ExpoApp> {
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
       store: widget.store,
-      child: MaterialApp(
+      child: AppBuilder(builder: (context) {
+        final state = widget.store.state;
+
+        return MaterialApp(
         title: 'HVL Expo',
         debugShowCheckedModeBanner: false,
         theme: ExpoTheme.primaryTheme,
         routes: {
-          InitScreen.route: (context) => InitScreen(),
-          LoginScreen.route: (context) => LoginScreen(),
-          HomeScreen.route: (context) => HomeScreen(),
-          UserScreen.route: (context) {
+          Routes.init: (context) => InitScreen(),
+          Routes.login: (context) => LoginScreen(),
+          Routes.home: (context) => HomeScreen(),
+          Routes.user: (context) {
             widget.store.dispatch(LoadUsers());
             return UserScreen();
           },
-          UserViewScreen.route: (context) => UserViewScreen(),
-          UserEditScreen.route: (context) => UserEditScreen(),
-          ExhibitionScreen.route: (context) {
+          Routes.userView: (context) => UserViewScreen(),
+          Routes.userEdit: (context) => UserEditScreen(),
+          Routes.exhibition: (context) {
             widget.store.dispatch(LoadExhibitions());
             return ExhibitionScreen();
           },
-          ExhibitionViewScreen.route: (context) => ExhibitionViewScreen(),
-          ExhibitionEditScreen.route: (context) => ExhibitionEditScreen(),
+          Routes.exhibitionView: (context) => ExhibitionViewScreen(),
+          Routes.exhibitionEdit: (context) => ExhibitionEditScreen(),
         },
-      ),
+      );
+      },)
+      
     );
   }
 }

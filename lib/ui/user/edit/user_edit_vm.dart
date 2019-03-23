@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:expo/redux/ui/ui_actions.dart';
-import 'package:expo/ui/user/user_screen.dart';
+import 'package:expo/utils/routes.dart';
 import 'package:redux/redux.dart';
 import 'package:expo/redux/user/user_actions.dart';
 import 'package:expo/data/models/user_model.dart';
@@ -55,7 +55,7 @@ class UserEditVM {
         store.dispatch(UpdateUser(user));
       },
       onBackPressed: () {
-        store.dispatch(UpdateCurrentRoute(UserScreen.route));
+        store.dispatch(UpdateCurrentRoute(Routes.user));
       },
       onSavePressed: (BuildContext context) {
         final Completer<Null> completer = new Completer<Null>();

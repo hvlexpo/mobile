@@ -3,7 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:expo/redux/app/app_state.dart';
 import 'package:expo/redux/ui/ui_actions.dart';
 import 'package:expo/ui/app/app_drawer_vm.dart';
-import 'package:expo/ui/home/home_screen.dart';
+import 'package:expo/utils/routes.dart';
 import 'package:redux/redux.dart';
 import 'package:expo/redux/user/user_actions.dart';
 
@@ -34,8 +34,8 @@ class AppDrawer extends StatelessWidget {
             leading: Icon(Icons.home),
             title: Text('Home'),
             onTap: () {
-              store.dispatch(UpdateCurrentRoute(HomeScreen.route));
-              navigator.pushReplacementNamed(HomeScreen.route);
+              store.dispatch(UpdateCurrentRoute(Routes.home));
+              navigator.pushReplacementNamed(Routes.home);
             },
           ),
           ListTile(

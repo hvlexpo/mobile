@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:expo/redux/ui/ui_actions.dart';
-import 'package:expo/ui/exhibition/exhibition_screen.dart';
+import 'package:expo/utils/routes.dart';
 import 'package:redux/redux.dart';
 import 'package:expo/redux/exhibition/exhibition_actions.dart';
 import 'package:expo/data/models/exhibition_model.dart';
@@ -55,7 +55,7 @@ class ExhibitionEditVM {
         store.dispatch(UpdateExhibition(exhibition));
       },
       onBackPressed: () {
-        store.dispatch(UpdateCurrentRoute(ExhibitionScreen.route));
+        store.dispatch(UpdateCurrentRoute(Routes.exhibition));
       },
       onSavePressed: (BuildContext context) {
         final Completer<Null> completer = new Completer<Null>();
