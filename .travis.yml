@@ -38,9 +38,9 @@ matrix:
         - touch $HOME/.android/repositories.cfg
         - yes | sdkmanager "platforms;android-28"
         - yes | sdkmanager "build-tools;28.0.3"
-      before_script:
         - openssl aes-256-cbc -K $encrypted_c9184bc163af_key -iv $encrypted_c9184bc163af_iv -in secrets.tar.enc -out secrets.tar -d
         - tar xvf secrets.tar
+      before_script:
         - if [  ! -d "flutter" ] ; then git clone https://github.com/flutter/flutter.git -b beta; fi;
         - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
         - flutter doctor
@@ -72,14 +72,14 @@ matrix:
         - yes | rm /usr/local/bin/xcodeproj
         - brew install cocoapods
         - yes | brew link --overwrite cocoapods
+        - openssl aes-256-cbc -K $encrypted_c9184bc163af_key -iv $encrypted_c9184bc163af_iv -in secrets.tar.enc -out secrets.tar -d
+        - tar xvf secrets.tar
         - if [  ! -d "flutter" ] ; then git clone https://github.com/flutter/flutter.git -b beta; fi;
         - export PATH=`pwd`/flutter/bin:`pwd`/flutter/bin/cache/dart-sdk/bin:$PATH
         - sudo chmod -R 777 flutter/*
       before_script:
-        - openssl aes-256-cbc -K $encrypted_c9184bc163af_key -iv $encrypted_c9184bc163af_iv -in secrets.tar.enc -out secrets.tar -d
-        - tar xvf secrets.tar
         - flutter doctor
-        script:
+      script:
         - flutter packages get
         - flutter clean
         - flutter test
