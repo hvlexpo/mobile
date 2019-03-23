@@ -2,7 +2,7 @@ matrix:
   include:
 
     # Flutter Android build
-    - name: "Flutter Android"
+    - name: "Android Build"
       if: branch IN (master, develop, release)
       os: linux
       dist: xenial
@@ -51,7 +51,7 @@ matrix:
         - flutter build apk --build-number=$TRAVIS_BUILD_NUMBER
 
     # Flutter iOS build
-    - name: "Flutter iOS"
+    - name: "iOS Build"
       os: osx
       language: generic
       if: branch IN (master, develop, release)
