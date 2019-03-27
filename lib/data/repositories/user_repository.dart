@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:core';
 import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:expo/data/models/models.dart';
 import 'package:expo/data/models/serializers.dart';
 import 'package:expo/data/models/user_model.dart';
@@ -15,6 +16,13 @@ class UserRepository {
     this.webClient = const WebClient(),
   });
 
+  Future<void> createOrUpdateUser(FirebaseUser user) async {
+    final token = await user.getIdToken();
+    final response = await webClient
+        .get(kApiUrl + '/users', headers: {'FirebaseToken': token});
+    print(response);
+  }
+
   Future<BuiltList<UserEntity>> loadList() async {
     final response = await webClient.get(kApiUrl + '/users');
 
@@ -26,13 +34,11 @@ class UserRepository {
   }
 
   Future saveData(UserEntity user, [EntityAction action]) async {
-
     var data = serializers.serializeWith(UserEntity.serializer, user);
     var response;
 
     if (user.isNew) {
-      response = await webClient.post(
-          kApiUrl + '/users', json.encode(data));
+      response = await webClient.post(kApiUrl + '/users', json.encode(data));
     } else {
       var url = kApiUrl + '/users/' + user.id.toString();
       response = await webClient.put(url, json.encode(data));
