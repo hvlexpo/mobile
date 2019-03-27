@@ -6,10 +6,10 @@ import 'package:http/http.dart' as http;
 class WebClient {
   const WebClient();
 
-  Future<dynamic> get(String url) async {
+  Future<dynamic> get(String url, {Map<String, String> headers}) async {
     final http.Response response = await http.Client().get(
-          url,
-        );
+      url, headers: headers,
+    );
 
     if (response.statusCode >= 400) {
       throw ('An error occurred: ' + response.body);
