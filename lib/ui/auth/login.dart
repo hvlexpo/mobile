@@ -80,8 +80,8 @@ class _LoginState extends State<LoginView> {
                 style: TextStyle(color: ExpoColors.hvlAccent),
               ),
               onPressed: () async => codeSent
-                  ? _verifyCode(_smsCodeController.text)
-                  : _verifyPhone('+47${_phoneNumberController.text}'),
+                  ? _verifyCode(_smsCodeController.text, context)
+                  : _verifyPhone('+47${_phoneNumberController.text}', context),
             )
           ],
         ),
@@ -89,7 +89,7 @@ class _LoginState extends State<LoginView> {
     );
   }
 
-  _verifyCode(String smsCode) async {
+  _verifyCode(String smsCode, BuildContext context) async {
     final credentials = PhoneAuthProvider.getCredential(
       verificationId: verificationId,
       smsCode: smsCode,
@@ -110,7 +110,7 @@ class _LoginState extends State<LoginView> {
     });
   }
 
-  Future<void> _verifyPhone(String phoneNumber) async {
+  Future<void> _verifyPhone(String phoneNumber, BuildContext context) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       timeout: Duration(seconds: 5),
