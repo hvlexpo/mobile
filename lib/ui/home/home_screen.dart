@@ -1,5 +1,8 @@
+import 'dart:async';
+import 'package:expo/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:expo/ui/theme/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,11 +14,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentPage;
+  StreamSubscription authListener;
 
   @override
   void initState() {
     super.initState();
+    authListener = FirebaseAuth.instance.onAuthStateChanged.listen((user) {
+      if(user != null) {
+
+      } else {
+        Navigator.of(context).popAndPushNamed(Routes.login);
+      }
+    });
     currentPage = 1;
+  }
+
+  @override
+  void dispose() {
+    authListener.cancel();
+    super.dispose();
   }
 
   @override
@@ -91,7 +108,12 @@ class _HomeScreenState extends State<HomeScreen> {
         break;
 
       case 1:
-        return Text('1');
+        return Center(child: IconButton(
+          icon: Icon(Icons.exit_to_app),
+          onPressed: () {
+            FirebaseAuth.instance.signOut();
+          },
+        ),);
         break;
       default:
         return Text('Error');

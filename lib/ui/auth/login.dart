@@ -82,7 +82,19 @@ class _LoginState extends State<LoginView> {
               onPressed: () async => codeSent
                   ? _verifyCode(_smsCodeController.text, context)
                   : _verifyPhone('+47${_phoneNumberController.text}', context),
-            )
+            ),
+            codeSent
+                ? FlatButton.icon(
+                    icon: Icon(Icons.refresh),
+                    label: Text(
+                      'No code received?',
+                      style: TextStyle(color: ExpoColors.hvlAccent),
+                    ),
+                    onPressed: () => setState(() {
+                          codeSent = false;
+                        }),
+                  )
+                : Container(),
           ],
         ),
       ),
