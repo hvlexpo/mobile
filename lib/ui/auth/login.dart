@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:expo/ui/theme/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:expo/utils/routes.dart';
-import 'package:expo/keys.dart';
 
 class LoginView extends StatefulWidget {
   LoginView({
@@ -16,6 +15,9 @@ class LoginView extends StatefulWidget {
 class _LoginState extends State<LoginView> {
   final _phoneNumberController = TextEditingController();
   final _smsCodeController = TextEditingController();
+
+  // Needed to access the Scaffold's state outside of the tree
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   String verificationId;
   bool codeSent;
@@ -35,6 +37,7 @@ class _LoginState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: ExpoColors.hvlPrimary,
       body: Container(
         child: Column(
@@ -51,6 +54,7 @@ class _LoginState extends State<LoginView> {
                 style: TextStyle(fontSize: 32, color: ExpoColors.hvlAccent),
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
+                  helperText: 'Phone number',
                   filled: true,
                   prefix: Text('+47'),
                 ),
@@ -65,6 +69,7 @@ class _LoginState extends State<LoginView> {
                           TextStyle(fontSize: 32, color: ExpoColors.hvlAccent),
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
+                        helperText: 'SMS Code',
                         filled: true,
                       ),
                     ),
@@ -80,8 +85,8 @@ class _LoginState extends State<LoginView> {
                 style: TextStyle(color: ExpoColors.hvlAccent),
               ),
               onPressed: () async => codeSent
-                  ? _verifyCode(_smsCodeController.text, context)
-                  : _verifyPhone('+47${_phoneNumberController.text}', context),
+                  ? await _verifyCode(_smsCodeController.text)
+                  : await _verifyPhone('+47${_phoneNumberController.text}'),
             ),
             codeSent
                 ? FlatButton.icon(
@@ -95,34 +100,50 @@ class _LoginState extends State<LoginView> {
                         }),
                   )
                 : Container(),
+            /*FlatButton.icon(
+              icon: Icon(GroovinMaterialIcons.fire, color: ExpoColors.hvlAccent),
+              label: Text('Debug login', style: TextStyle(color: ExpoColors.hvlAccent),),
+              onPressed: () async {
+                await FirebaseAuth.instance.signInAnonymously().then((user) {
+                  Navigator.of(context).popAndPushNamed(Routes.home);
+                });
+              },
+            )*/
           ],
         ),
       ),
     );
   }
 
-  _verifyCode(String smsCode, BuildContext context) async {
+  /// Verifies the given [smsCode] with Firebase using the
+  /// [verificationId] received from the ``verifyPhone`` method
+  _verifyCode(String smsCode) async {
     final credentials = PhoneAuthProvider.getCredential(
       verificationId: verificationId,
       smsCode: smsCode,
     );
     await FirebaseAuth.instance.signInWithCredential(credentials).then((user) {
-      Scaffold.of(context).showSnackBar(SnackBar(
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text(
           'Logged in with ${user.phoneNumber}',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: ExpoColors.hvlAccent,
       ));
+      Navigator.of(context).popAndPushNamed(Routes.home);
     }).catchError((error) {
-      Scaffold.of(context).showSnackBar(SnackBar(
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text(error.message),
         backgroundColor: Colors.red,
       ));
     });
   }
 
-  Future<void> _verifyPhone(String phoneNumber, BuildContext context) async {
+  /// Verifies the given [phoneNumber] with Firebase, and
+  /// either auto-retrieves a code via Google Play or sends
+  /// an SMS code to the given [phoneNumber]. Also sets the
+  /// [verificationId] for later verification of the SMS code
+  Future<void> _verifyPhone(String phoneNumber) async {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       timeout: Duration(seconds: 5),
@@ -132,7 +153,7 @@ class _LoginState extends State<LoginView> {
       },
       verificationFailed: (error) {
         print(error);
-        Scaffold.of(context).showSnackBar(SnackBar(
+        _scaffoldKey.currentState.showSnackBar(SnackBar(
           content: Text(error.message),
           backgroundColor: Colors.red,
         ));
