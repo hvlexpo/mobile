@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/animation.dart';
 
 class RoundedButton extends StatelessWidget {
   final Widget child;
@@ -21,7 +20,6 @@ class RoundedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
     return GestureDetector(
       onTap: () {
         onPressed();

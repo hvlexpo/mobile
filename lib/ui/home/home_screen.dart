@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:expo/ui/theme/theme.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
-import 'package:expo/ui/app/app_drawer_vm.dart';
 
 class HomeScreen extends StatefulWidget {
   static final String route = '/home';

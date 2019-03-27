@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:expo/data/models/models.dart';
 import 'package:expo/data/models/serializers.dart';
-import 'package:expo/redux/auth/auth_state.dart';
 import 'package:expo/data/models/user_model.dart';
 import 'package:expo/data/web_client.dart';
 import 'package:expo/constants.dart';
@@ -16,7 +15,7 @@ class UserRepository {
     this.webClient = const WebClient(),
   });
 
-  Future<BuiltList<UserEntity>> loadList(AuthState auth) async {
+  Future<BuiltList<UserEntity>> loadList() async {
     final response = await webClient.get(kApiUrl + '/users');
 
     var list = new BuiltList<UserEntity>(response.map((user) {
@@ -26,7 +25,7 @@ class UserRepository {
     return list;
   }
 
-  Future saveData(AuthState auth, UserEntity user, [EntityAction action]) async {
+  Future saveData(UserEntity user, [EntityAction action]) async {
 
     var data = serializers.serializeWith(UserEntity.serializer, user);
     var response;

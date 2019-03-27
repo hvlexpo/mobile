@@ -32,12 +32,6 @@ dependencies:
   # qr related
   qr_mobile_vision: ^0.2.2
   qr: ^1.0.1
-  
-  # redux packages
-  redux: ^3.0.0
-  flutter_redux: ^0.5.3
-  redux_epics: ^0.10.4
-  redux_logging: ^0.3.0
 
   # built value types
   built_value: ^6.3.2
