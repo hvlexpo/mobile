@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:expo/ui/theme/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:expo/data/repositories/user_repository.dart';
 import 'package:expo/utils/routes.dart';
 
 class LoginView extends StatefulWidget {
@@ -15,6 +16,7 @@ class LoginView extends StatefulWidget {
 class _LoginState extends State<LoginView> {
   final _phoneNumberController = TextEditingController();
   final _smsCodeController = TextEditingController();
+  final UserRepository userRepository = UserRepository();
 
   // Needed to access the Scaffold's state outside of the tree
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -122,7 +124,9 @@ class _LoginState extends State<LoginView> {
       verificationId: verificationId,
       smsCode: smsCode,
     );
-    await FirebaseAuth.instance.signInWithCredential(credentials).then((user) {
+    await FirebaseAuth.instance
+        .signInWithCredential(credentials)
+        .then((user) async {
       _scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text(
           'Logged in with ${user.phoneNumber}',
@@ -130,7 +134,9 @@ class _LoginState extends State<LoginView> {
         ),
         backgroundColor: ExpoColors.hvlAccent,
       ));
-      Navigator.of(context).popAndPushNamed(Routes.home);
+      await userRepository.createOrUpdateUser(user).then((_) {
+        Navigator.of(context).popAndPushNamed(Routes.home);
+      });
     }).catchError((error) {
       _scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text(error.message),
@@ -147,9 +153,11 @@ class _LoginState extends State<LoginView> {
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       timeout: Duration(seconds: 5),
-      verificationCompleted: (user) {
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            Routes.home, (Route<dynamic> route) => false);
+      verificationCompleted: (user) async {
+        await userRepository.createOrUpdateUser(user).then((_) {
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              Routes.home, (Route<dynamic> route) => false);
+        });
       },
       verificationFailed: (error) {
         print(error);
