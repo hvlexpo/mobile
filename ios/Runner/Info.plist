@@ -24,7 +24,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>no.hvl.expo</string>
+			<string>com.hvl.expo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.54626777503-6v2nv6ov91cgqeof4rq70oa1a342ofd1</string>

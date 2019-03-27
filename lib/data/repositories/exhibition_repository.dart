@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:built_collection/built_collection.dart';
 import 'package:expo/data/models/models.dart';
 import 'package:expo/data/models/serializers.dart';
-import 'package:expo/redux/auth/auth_state.dart';
 import 'package:expo/data/models/exhibition_model.dart';
 import 'package:expo/data/web_client.dart';
 import 'package:expo/constants.dart';
@@ -16,7 +15,7 @@ class ExhibitionRepository {
     this.webClient = const WebClient(),
   });
 
-  Future<BuiltList<ExhibitionEntity>> loadList(AuthState auth) async {
+  Future<BuiltList<ExhibitionEntity>> loadList() async {
     final response = await webClient.get(kApiUrl + '/exhibitions');
 
     var list = new BuiltList<ExhibitionEntity>(response.map((exhibition) {
@@ -26,7 +25,7 @@ class ExhibitionRepository {
     return list;
   }
 
-  Future saveData(AuthState auth, ExhibitionEntity exhibition, [EntityAction action]) async {
+  Future saveData(ExhibitionEntity exhibition, [EntityAction action]) async {
 
     var data = serializers.serializeWith(ExhibitionEntity.serializer, exhibition);
     var response;

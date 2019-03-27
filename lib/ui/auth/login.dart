@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:expo/ui/theme/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:expo/utils/routes.dart';
 import 'package:expo/keys.dart';
-import 'package:expo/ui/auth/login_vm.dart';
 
 class LoginView extends StatefulWidget {
-  final LoginVM viewModel;
-
   LoginView({
     Key key,
-    @required this.viewModel,
   }) : super(key: key);
 
   @override
@@ -15,109 +14,141 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginState extends State<LoginView> {
-  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   final _phoneNumberController = TextEditingController();
+  final _smsCodeController = TextEditingController();
 
-  static final ValueKey _phoneNumberKey = new Key(LoginKeys.phoneNumberKey);
+  String verificationId;
+  bool codeSent;
 
   @override
-  void didChangeDependencies() {
-    var authState = widget.viewModel.authState;
-    _phoneNumberController.text = authState.phoneNumber;
-
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    codeSent = false;
   }
 
   @override
   void dispose() {
     _phoneNumberController.dispose();
-
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var viewModel = widget.viewModel;
-
-    if (!viewModel.authState.isInitialized) {
-      return Container();
-    }
-
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Column(
-        children: <Widget>[
-          Form(
-            key: _formKey,
-            child: FormCard(
-              children: <Widget>[
-                TextFormField(
-                  controller: _phoneNumberController,
-                  key: _phoneNumberKey,
-                  autocorrect: false,
-                  decoration: InputDecoration(labelText: 'Phone'),
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (val) => val.isEmpty || val.trim().length == 0
-                      ? 'Please enter your phone number'
-                      : null,
-                ),
-                viewModel.authState.error == null
-                    ? Container()
-                    : Container(
-                        padding: EdgeInsets.only(top: 26.0, bottom: 4.0),
-                        child: Center(
-                          child: Text(
-                            viewModel.authState.error,
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-              ],
+    return Scaffold(
+      backgroundColor: ExpoColors.hvlPrimary,
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/images/hvl_logo.png'),
+            SizedBox(
+              height: 50,
             ),
-          ),
-          RaisedButton(
-            child: Text('LOGIN'),
-            onPressed: () {
-              if (!_formKey.currentState.validate()) {
-                return;
-              }
-              viewModel.onLoginPressed(
-                context,
-                _phoneNumberController.text,
-              );
-            },
-          ),
-        ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              child: TextFormField(
+                controller: _phoneNumberController,
+                style: TextStyle(fontSize: 32, color: ExpoColors.hvlAccent),
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  filled: true,
+                  prefix: Text('+47'),
+                ),
+              ),
+            ),
+            codeSent
+                ? Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    child: TextFormField(
+                      controller: _smsCodeController,
+                      style:
+                          TextStyle(fontSize: 32, color: ExpoColors.hvlAccent),
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                        filled: true,
+                      ),
+                    ),
+                  )
+                : Container(),
+            FlatButton.icon(
+              icon: Icon(
+                Icons.arrow_forward,
+                color: ExpoColors.hvlAccent,
+              ),
+              label: Text(
+                codeSent ? 'Verify code' : 'Send code',
+                style: TextStyle(color: ExpoColors.hvlAccent),
+              ),
+              onPressed: () async => codeSent
+                  ? _verifyCode(_smsCodeController.text, context)
+                  : _verifyPhone('+47${_phoneNumberController.text}', context),
+            ),
+            codeSent
+                ? FlatButton.icon(
+                    icon: Icon(Icons.refresh),
+                    label: Text(
+                      'No code received?',
+                      style: TextStyle(color: ExpoColors.hvlAccent),
+                    ),
+                    onPressed: () => setState(() {
+                          codeSent = false;
+                        }),
+                  )
+                : Container(),
+          ],
+        ),
       ),
     );
   }
-}
 
-class FormCard extends StatelessWidget {
-  FormCard({
-    Key key,
-    @required this.children,
-  }) : super(key: key);
-
-  final List<Widget> children;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Card(
-        elevation: 2.0,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: children,
-          ),
+  _verifyCode(String smsCode, BuildContext context) async {
+    final credentials = PhoneAuthProvider.getCredential(
+      verificationId: verificationId,
+      smsCode: smsCode,
+    );
+    await FirebaseAuth.instance.signInWithCredential(credentials).then((user) {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text(
+          'Logged in with ${user.phoneNumber}',
+          style: TextStyle(color: Colors.white),
         ),
-      ),
+        backgroundColor: ExpoColors.hvlAccent,
+      ));
+    }).catchError((error) {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text(error.message),
+        backgroundColor: Colors.red,
+      ));
+    });
+  }
+
+  Future<void> _verifyPhone(String phoneNumber, BuildContext context) async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: phoneNumber,
+      timeout: Duration(seconds: 5),
+      verificationCompleted: (user) {
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            Routes.home, (Route<dynamic> route) => false);
+      },
+      verificationFailed: (error) {
+        print(error);
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text(error.message),
+          backgroundColor: Colors.red,
+        ));
+      },
+      codeSent: (id, [token]) {
+        setState(() {
+          verificationId = id;
+          codeSent = true;
+        });
+      },
+      codeAutoRetrievalTimeout: (id) {
+        setState(() {
+          verificationId = id;
+          codeSent = true;
+        });
+      },
     );
   }
 }
