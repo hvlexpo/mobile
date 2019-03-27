@@ -23,6 +23,12 @@ class UserRepository {
     print(response);
   }
 
+  Future<void> updateUser(FirebaseUser user) async {
+    final token = await user.getIdToken();
+    final response = await webClient.post(kApiUrl + '/users', {'name': user.displayName});
+    print(response);
+  }
+
   Future<BuiltList<UserEntity>> loadList() async {
     final response = await webClient.get(kApiUrl + '/users');
 
