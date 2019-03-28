@@ -18,38 +18,11 @@ class UserRepository {
 
   Future<void> createOrUpdateUser(FirebaseUser user) async {
     final token = await user.getIdToken();
-    final response = await webClient
-        .get(kApiUrl + '/users', headers: {'FirebaseToken': token});
-    print(response);
+    await webClient.get(kApiUrl + '/users', headers: {'FirebaseToken': token});
   }
 
   Future<void> updateUser(FirebaseUser user) async {
     final token = await user.getIdToken();
-    final response = await webClient.post(kApiUrl + '/users', {'name': user.displayName});
-    print(response);
-  }
-
-  Future<BuiltList<UserEntity>> loadList() async {
-    final response = await webClient.get(kApiUrl + '/users');
-
-    var list = new BuiltList<UserEntity>(response.map((user) {
-      return serializers.deserializeWith(UserEntity.serializer, user);
-    }));
-
-    return list;
-  }
-
-  Future saveData(UserEntity user, [EntityAction action]) async {
-    var data = serializers.serializeWith(UserEntity.serializer, user);
-    var response;
-
-    if (user.isNew) {
-      response = await webClient.post(kApiUrl + '/users', json.encode(data));
-    } else {
-      var url = kApiUrl + '/users/' + user.id.toString();
-      response = await webClient.put(url, json.encode(data));
-    }
-
-    return serializers.deserializeWith(UserEntity.serializer, response);
+    await webClient.post(kApiUrl + '/users', {'name': user.displayName});
   }
 }
