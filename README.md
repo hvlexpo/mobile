@@ -9,7 +9,7 @@
 <h4 align="center">The HVL Expo mobile experience built on <a href="https://flutter.io" target="_blank">Flutter</a> and <a href="https://firebase.google.com/" target="_blank">Firebase</a>.</h4>
 
 <p align="center">
-  <a href="https://travis-ci.com/hvlexpo/hvlexpo/">
+  <a href="https://travis-ci.com/hvlexpo/mobile/">
     <img src="https://travis-ci.com/hvlexpo/mobile.svg?branch=master"
          alt="Travis CI">
   </a>
