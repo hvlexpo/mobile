@@ -1,4 +1,4 @@
-package com.hvl.expo
+package no.hvlexpo.app
 
 import android.os.Bundle
 
