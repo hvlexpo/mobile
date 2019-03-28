@@ -36,8 +36,7 @@ matrix:
     - touch $HOME/.android/repositories.cfg
     - yes | sdkmanager "platforms;android-28"
     - yes | sdkmanager "build-tools;28.0.3"
-    - openssl aes-256-cbc -K $encrypted_f6208b460a3f_key -iv $encrypted_f6208b460a3f_iv
-      -in secrets.tar.enc -out secrets.tar -d
+    - openssl aes-256-cbc -K $encrypted_f6208b460a3f_key -iv $encrypted_f6208b460a3f_iv -in secrets.tar.enc -out secrets.tar -d
     - tar xvf secrets.tar
     before_script:
     - if [  ! -d "flutter" ] ; then git clone https://github.com/flutter/flutter.git
@@ -70,8 +69,7 @@ matrix:
     - yes | rm /usr/local/bin/xcodeproj
     - brew install cocoapods
     - yes | brew link --overwrite cocoapods
-    - openssl aes-256-cbc -K $encrypted_f6208b460a3f_key -iv $encrypted_f6208b460a3f_iv
-      -in secrets.tar.enc -out secrets.tar -d
+    - openssl aes-256-cbc -K $encrypted_f6208b460a3f_key -iv $encrypted_f6208b460a3f_iv -in secrets.tar.enc -out secrets.tar -d
     - tar xvf secrets.tar
     - if [  ! -d "flutter" ] ; then git clone https://github.com/flutter/flutter.git
       -b beta; fi;
