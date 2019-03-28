@@ -157,6 +157,12 @@ class _LoginState extends State<LoginView> {
         await userRepository.createOrUpdateUser(user).then((_) {
           Navigator.of(context).pushNamedAndRemoveUntil(
               Routes.home, (Route<dynamic> route) => false);
+        }).catchError((error) {
+          print(error);
+          _scaffoldKey.currentState.showSnackBar(SnackBar(
+            content: Text(error.message),
+            backgroundColor: Colors.red,
+          ));
         });
       },
       verificationFailed: (error) {

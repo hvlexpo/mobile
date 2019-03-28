@@ -8,7 +8,9 @@ class ProfileView extends StatelessWidget {
       child: Column(
         children: [
           Card(
-            child: Center(child: _userText()),
+            child: Center(
+              child: _userText(),
+            ),
           ),
         ],
       ),
@@ -19,13 +21,14 @@ class ProfileView extends StatelessWidget {
     return FutureBuilder<FirebaseUser>(
       future: FirebaseAuth.instance.currentUser(),
       builder: (context, snapshot) {
-        if(snapshot.hasData) {
+        if (snapshot.hasData) {
           return Column(
             children: <Widget>[
               Text(snapshot.data.phoneNumber),
             ],
           );
-        } else return Text('Loading..');
+        } else
+          return Text('Loading..');
       },
     );
   }
