@@ -8,21 +8,19 @@ import 'package:expo/data/models/serializers.dart';
 import 'package:expo/data/models/user_model.dart';
 import 'package:expo/data/web_client.dart';
 import 'package:expo/constants.dart';
+import 'package:http/http.dart';
 
 class UserRepository {
-  final WebClient webClient;
-
-  const UserRepository({
-    this.webClient = const WebClient(),
-  });
+  const UserRepository();
 
   Future<void> createOrUpdateUser(FirebaseUser user) async {
     final token = await user.getIdToken();
-    await webClient.get(kApiUrl + '/users', headers: {'FirebaseToken': token});
+    await get(kApiUrl + '/users', headers: {'FirebaseToken': token});
   }
 
   Future<void> updateUser(FirebaseUser user) async {
     final token = await user.getIdToken();
-    await webClient.post(kApiUrl + '/users', {'name': user.displayName});
+    await post(kApiUrl + '/users',
+        headers: {'name': user.displayName, 'FirebaseToken': token});
   }
 }
