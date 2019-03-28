@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import '../theme/theme.dart';
 import 'qr_reader.dart';
 
-class ScannerPage extends StatefulWidget {
+class ScannerView extends StatefulWidget {
 
-  ScannerPage({Key key}) : super(key: key);
+  ScannerView({Key key}) : super(key: key);
 
   @override
   _ScannerPageState createState() => _ScannerPageState();
 }
 
-class _ScannerPageState extends State<ScannerPage> {
+class _ScannerPageState extends State<ScannerView> {
   String scannedText = '';
 
   @override

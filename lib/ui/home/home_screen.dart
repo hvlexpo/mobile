@@ -6,14 +6,14 @@ import 'package:expo/ui/profile/profile_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeView extends StatefulWidget {
   static final String route = '/home';
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeView> {
   int currentPage;
   StreamSubscription authListener;
 
