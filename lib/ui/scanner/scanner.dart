@@ -3,7 +3,6 @@ import '../theme/theme.dart';
 import 'qr_reader.dart';
 
 class ScannerView extends StatefulWidget {
-
   ScannerView({Key key}) : super(key: key);
 
   @override
@@ -24,11 +23,20 @@ class _ScannerPageState extends State<ScannerView> {
       ),
       backgroundColor: ExpoColors.hvlPrimary,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
-            child: QrReader(
-              onScanned: _onScanned,
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25)
+              ),
+              clipBehavior: Clip.hardEdge,
+              child: QrReader(
+                onError: _onError,
+                onScanned: _onScanned,
+              ),
             ),
           ),
           Text(
@@ -58,5 +66,19 @@ class _ScannerPageState extends State<ScannerView> {
 
   void _onScanned(dynamic value) async {
     // TODO Implement post-scan processing and navigation
+    setState(() {
+      scannedText = value;
+    });
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text(value),
+      backgroundColor: Colors.green,
+    ));
+  }
+
+  void _onError(dynamic error) async {
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text(error),
+      backgroundColor: Colors.red,
+    ));
   }
 }

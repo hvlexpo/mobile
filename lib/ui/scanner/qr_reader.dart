@@ -6,6 +6,7 @@ class QrReader extends StatefulWidget {
   final DynamicCallback onScanned;
 
   QrReader({this.onScanned, key}) : super(key: key);
+  QrReader({this.onScanned,this.onError, key}) : super(key: key);
 
   _QrReaderState createState() => _QrReaderState();
 }

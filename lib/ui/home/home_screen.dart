@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeView> {
         ],
       )),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: null, //() => Navigator.pushNamed(context, Routes.scan),
+        onPressed: () => Navigator.pushNamed(context, Routes.scan),
         elevation: 4.0,
         icon: Icon(Icons.nfc),
         backgroundColor: ExpoColors.hvlAccent,
