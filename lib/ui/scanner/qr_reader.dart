@@ -27,24 +27,27 @@ class _QrReaderState extends State<QrReader> {
   @override
   Widget build(BuildContext context) {
     // TODO Implement QR scanner
-    return SizedBox(
-      width: MediaQuery.of(context).size.width*0.8,
+    return Center(child: SizedBox(
+      
+      width: MediaQuery.of(context).size.width*1.0,
       height: MediaQuery.of(context).size.height*0.5,
       child: QrCamera(
         notStartedBuilder: _qrPlaceholder,
         qrCodeCallback: widget.onScanned,
         onError: (context, error) => widget.onError(error),
       ),
+    ),
     );
   }
 
   Widget _qrPlaceholder(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width*0.8,
+    return Center(child: SizedBox(
+      width: MediaQuery.of(context).size.width*0.6,
       height: MediaQuery.of(context).size.height*0.5,
       child: Center(
         child: Icon(Icons.camera),
       )
+    ),
     );
   }
 }
