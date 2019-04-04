@@ -17,7 +17,9 @@ class ExhibitionList extends StatelessWidget {
             itemBuilder: (context, index) {
               final exhibition = snapshot.data[index];
 
-              return ExhibitionTile(exhibition: exhibition);
+              return Padding(
+                padding: EdgeInsets.only(bottom: 10, left: 5, right: 5),
+                child: ExhibitionTile(exhibition: exhibition));
             },
           );
         } else {
