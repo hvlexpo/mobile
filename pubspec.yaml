@@ -28,6 +28,7 @@ dependencies:
   side_header_list_view: ^0.0.4
   auto_size_text: ^1.0.0
   cached_network_image: ^0.7.0
+  photo_view: ^0.2.2
 
   # qr related
   qr_mobile_vision: ^0.2.2
