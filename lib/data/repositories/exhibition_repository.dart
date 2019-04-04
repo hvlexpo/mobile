@@ -5,6 +5,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:expo/data/models/models.dart';
 import 'package:expo/data/models/serializers.dart';
 import 'package:expo/data/models/exhibition_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart';
 import 'package:expo/constants.dart';
 
@@ -12,15 +13,31 @@ class ExhibitionRepository {
   const ExhibitionRepository();
 
   Future<BuiltList<ExhibitionEntity>> loadList() async {
-    final response = await get(kApiUrl + '/exhibitions');
+    final user = await FirebaseAuth.instance.currentUser();
+    final token = await user.getIdToken();
 
-    var list = new BuiltList<ExhibitionEntity>(
-        jsonDecode(response.body).map((exhibition) {
+    return await get(kApiUrl + '/exhibitions',
+        headers: {'firebasetoken': token}).then(
+      (response) {
+        return BuiltList<ExhibitionEntity>(
+          jsonDecode(response.body).map(
+            (exhibition) => serializers.deserializeWith(
+                ExhibitionEntity.serializer, exhibition),
+          ),
+        );
+      },
+    ).catchError((error) => throw error);
+  }
+
+  Future<ExhibitionEntity> fetchExhibitionById(String id) async {
+    final user = await FirebaseAuth.instance.currentUser();
+    final token = await user.getIdToken();
+
+    return await get(kApiUrl + '/exhibitions/$id',
+        headers: {'firebasetoken': token}).then((response) {
       return serializers.deserializeWith(
-          ExhibitionEntity.serializer, exhibition);
-    }));
-
-    return list;
+          ExhibitionEntity.serializer, jsonDecode(response.body));
+    });
   }
 
   Future saveData(ExhibitionEntity exhibition, [EntityAction action]) async {

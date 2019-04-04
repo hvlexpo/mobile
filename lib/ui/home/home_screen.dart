@@ -3,6 +3,7 @@ import 'package:expo/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:expo/ui/theme/theme.dart';
 import 'package:expo/ui/profile/profile_view.dart';
+import 'package:expo/ui/exhibitions/exhibition_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
 
@@ -105,16 +106,11 @@ class _HomeScreenState extends State<HomeView> {
   _getPage(int page) {
     switch (page) {
       case 0:
-        return ProfileView();
+        return ExhibitionList();
         break;
 
       case 1:
-        return Center(child: IconButton(
-          icon: Icon(Icons.exit_to_app),
-          onPressed: () {
-            FirebaseAuth.instance.signOut();
-          },
-        ),);
+        return ProfileView();
         break;
       default:
         return Text('Error');

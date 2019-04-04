@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:expo/ui/theme/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfileView extends StatelessWidget {
@@ -6,12 +7,16 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Card(
-            child: Center(
-              child: _userText(),
+          Padding(
+            padding: EdgeInsets.only(left: 10, top: 10),
+            child: Text(
+              'Dine stemmer',
+              style: TextStyle(color: ExpoColors.hvlAccent, fontSize: 32),
             ),
           ),
+          historyList()
         ],
       ),
     );
@@ -29,6 +34,26 @@ class ProfileView extends StatelessWidget {
           );
         } else
           return Text('Loading..');
+      },
+    );
+  }
+
+  Widget historyList() {
+    return FutureBuilder(
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              return Container();
+            },
+          );
+        } else {
+          return Expanded(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
       },
     );
   }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:qr_mobile_vision/qr_camera.dart';
 typedef DynamicCallback(dynamic value);
+typedef StringCallback(String value);
 
 class QrReader extends StatefulWidget {
-  final DynamicCallback onScanned;
+  final StringCallback onScanned;
   final DynamicCallback onError;
 
   QrReader({this.onScanned,this.onError, key}) : super(key: key);

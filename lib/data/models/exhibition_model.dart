@@ -23,10 +23,13 @@ abstract class ExhibitionEntity extends Object
     implements Built<ExhibitionEntity, ExhibitionEntityBuilder> {
   String get id;
 
+  @nullable
   String get name;
 
+  @nullable
   String get description;
 
+  @nullable
   BuiltList<String> get photos;
 
   @nullable

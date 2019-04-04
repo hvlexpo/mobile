@@ -22,16 +22,26 @@ class _$ExhibitionEntitySerializer
     final result = <Object>[
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(String)),
-      'name',
-      serializers.serialize(object.name, specifiedType: const FullType(String)),
-      'description',
-      serializers.serialize(object.description,
-          specifiedType: const FullType(String)),
-      'photos',
-      serializers.serialize(object.photos,
-          specifiedType:
-              const FullType(BuiltList, const [const FullType(String)])),
     ];
+    if (object.name != null) {
+      result
+        ..add('name')
+        ..add(serializers.serialize(object.name,
+            specifiedType: const FullType(String)));
+    }
+    if (object.description != null) {
+      result
+        ..add('description')
+        ..add(serializers.serialize(object.description,
+            specifiedType: const FullType(String)));
+    }
+    if (object.photos != null) {
+      result
+        ..add('photos')
+        ..add(serializers.serialize(object.photos,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(String)])));
+    }
     if (object.votes != null) {
       result
         ..add('votes')
@@ -106,15 +116,6 @@ class _$ExhibitionEntity extends ExhibitionEntity {
       : super._() {
     if (id == null) {
       throw new BuiltValueNullFieldError('ExhibitionEntity', 'id');
-    }
-    if (name == null) {
-      throw new BuiltValueNullFieldError('ExhibitionEntity', 'name');
-    }
-    if (description == null) {
-      throw new BuiltValueNullFieldError('ExhibitionEntity', 'description');
-    }
-    if (photos == null) {
-      throw new BuiltValueNullFieldError('ExhibitionEntity', 'photos');
     }
   }
 
@@ -219,13 +220,13 @@ class ExhibitionEntityBuilder
               id: id,
               name: name,
               description: description,
-              photos: photos.build(),
+              photos: _photos?.build(),
               votes: _votes?.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'photos';
-        photos.build();
+        _photos?.build();
         _$failedField = 'votes';
         _votes?.build();
       } catch (e) {

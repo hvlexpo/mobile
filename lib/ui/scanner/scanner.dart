@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../theme/theme.dart';
-import 'qr_reader.dart';
+import 'package:expo/ui/theme/theme.dart';
+import 'package:expo/ui/scanner/qr_reader.dart';
+import 'package:qr_mobile_vision/qr_camera.dart';
+import 'package:expo/ui/exhibitions/exhibition_view.dart';
 
 class ScannerView extends StatefulWidget {
   ScannerView({Key key}) : super(key: key);
@@ -30,13 +32,19 @@ class _ScannerPageState extends State<ScannerView> {
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
             child: Card(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25)
-              ),
+                  borderRadius: BorderRadius.circular(25)),
               clipBehavior: Clip.hardEdge,
-              child: QrReader(
-                onError: _onError,
-                onScanned: _onScanned,
-              ),
+              child: Center(child: SizedBox(
+      
+      width: MediaQuery.of(context).size.width*1.0,
+      height: MediaQuery.of(context).size.height*0.5,
+      child: QrCamera(
+        notStartedBuilder: _qrPlaceholder,
+        qrCodeCallback: (value) => _onScanned(value),
+        onError: (context, error) => _onError(error),
+      ),
+    ),
+    )
             ),
           ),
           Text(
@@ -64,21 +72,27 @@ class _ScannerPageState extends State<ScannerView> {
     );
   }
 
-  void _onScanned(dynamic value) async {
+  void _onScanned(String value) async {
     // TODO Implement post-scan processing and navigation
-    setState(() {
-      scannedText = value;
-    });
-    Scaffold.of(context).showSnackBar(SnackBar(
-      content: Text(value),
-      backgroundColor: Colors.green,
-    ));
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ExhibitionView(exhibitionId: value),
+      ),
+    );
   }
 
-  void _onError(dynamic error) async {
-    Scaffold.of(context).showSnackBar(SnackBar(
-      content: Text(error),
-      backgroundColor: Colors.red,
-    ));
+  Widget _onError(dynamic error) {
+    return Text(error.message);
+  }
+
+  Widget _qrPlaceholder(BuildContext context) {
+    return Center(child: SizedBox(
+      width: MediaQuery.of(context).size.width*0.6,
+      height: MediaQuery.of(context).size.height*0.5,
+      child: Center(
+        child: Icon(Icons.camera),
+      )
+    ),
+    );
   }
 }
