@@ -3,6 +3,7 @@ import 'package:expo/data/repositories/exhibition_repository.dart';
 import 'package:expo/ui/theme/theme.dart';
 import 'package:expo/data/repositories/user_repository.dart';
 import 'package:expo/data/models/exhibition_model.dart';
+import 'package:expo/utils/localization.dart';
 
 class VoteDialog extends StatefulWidget {
   final ExhibitionEntity exhibition;

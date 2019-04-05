@@ -3,6 +3,7 @@ import 'package:expo/data/models/exhibition_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expo/ui/exhibitions/exhibition_default_view.dart';
 import 'package:expo/data/repositories/user_repository.dart';
+import 'package:expo/utils/localization.dart';
 import 'package:expo/ui/theme/theme.dart';
 
 class ExhibitionTile extends StatelessWidget {
@@ -38,7 +39,7 @@ class ExhibitionTile extends StatelessWidget {
             ),
             subtitle: Hero(
               tag: '${exhibition.id}__description',
-              child: Text(exhibition.description ?? 'No description'),
+              child: Text(exhibition.description ?? AppLocalizations.of(context).noDescription),
             ),
           ),
           ButtonTheme.bar(
@@ -48,7 +49,7 @@ class ExhibitionTile extends StatelessWidget {
                 _buildUserVotes(),
                 FlatButton(
                   child: Text(
-                    'View',
+                    AppLocalizations.of(context).view,
                     style: TextStyle(color: ExpoColors.hvlAccent),
                   ),
                   onPressed: () => Navigator.of(context).push(
@@ -93,7 +94,7 @@ class ExhibitionTile extends StatelessWidget {
               ? Column(
                   children: [
                     Text(
-                      'Your vote',
+                      AppLocalizations.of(context).yourVote,
                       style: TextStyle(color: Colors.black26),
                     ),
                     Row(

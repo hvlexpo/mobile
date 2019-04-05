@@ -16,7 +16,20 @@ void main() async {
   runApp(ExpoApp());
 }
 
-class ExpoApp extends StatelessWidget {
+class ExpoApp extends StatefulWidget {
+  @override
+  createState() => _ExpoAppState();
+}
+
+class _ExpoAppState extends State<ExpoApp> {
+  String _locale = 'no';
+
+  onLocaleChange() {
+    setState(() {
+      _locale = _locale == 'en' ? 'no' : 'en';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,8 +39,8 @@ class ExpoApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: [
-        Locale('en', ""),
-        Locale('no', ""),
+        Locale('en', 'US'),
+        Locale('no', 'NB'),
       ],
       title: 'HVL Expo',
       debugShowCheckedModeBanner: false,
