@@ -29,7 +29,7 @@ class ExhibitionTile extends StatelessWidget {
                   Icons.star_half,
                   color: Colors.yellow,
                 ),
-                Text('${exhibition.votes != null ? exhibition.votes : 4.7}'),
+                Text('${exhibition.votes != null ? exhibition.votes.truncateToDouble() : 4.7}'),
               ],
             ),
             title: Text(exhibition.name),

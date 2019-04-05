@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:expo/data/models/exhibition_model.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class AboutTab extends StatelessWidget {
   final ExhibitionEntity exhibition;
@@ -8,10 +9,9 @@ class AboutTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Text(exhibition.description ?? 'No description')
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 25),
+      child: AutoSizeText(exhibition.description ?? 'No description'),
     );
   }
 }

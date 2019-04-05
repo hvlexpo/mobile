@@ -26,7 +26,7 @@ class ExhibitionRepository {
           ),
         );
       },
-    ).catchError((error) => throw error);
+    ).catchError((error) => print(error));
   }
 
   Future<ExhibitionEntity> fetchExhibitionById(String id) async {
@@ -55,7 +55,7 @@ class ExhibitionRepository {
     return serializers.deserializeWith(ExhibitionEntity.serializer, response);
   }
 
-  Future<void> vote(String id, int weight) async {
+  Future<void> vote(String id, String weight) async {
     final user = await FirebaseAuth.instance.currentUser();
     final token = await user.getIdToken();
     
