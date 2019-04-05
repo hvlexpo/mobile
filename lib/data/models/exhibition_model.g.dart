@@ -46,8 +46,14 @@ class _$ExhibitionEntitySerializer
       result
         ..add('votes')
         ..add(serializers.serialize(object.votes,
+            specifiedType: const FullType(double)));
+    }
+    if (object.creators != null) {
+      result
+        ..add('creators')
+        ..add(serializers.serialize(object.creators,
             specifiedType: const FullType(BuiltMap,
-                const [const FullType(String), const FullType(int)])));
+                const [const FullType(String), const FullType(String)])));
     }
 
     return result;
@@ -83,10 +89,14 @@ class _$ExhibitionEntitySerializer
               as BuiltList);
           break;
         case 'votes':
-          result.votes.replace(serializers.deserialize(value,
+          result.votes = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'creators':
+          result.creators.replace(serializers.deserialize(value,
               specifiedType: const FullType(BuiltMap, const [
                 const FullType(String),
-                const FullType(int)
+                const FullType(String)
               ])) as BuiltMap);
           break;
       }
@@ -106,13 +116,20 @@ class _$ExhibitionEntity extends ExhibitionEntity {
   @override
   final BuiltList<String> photos;
   @override
-  final BuiltMap<String, int> votes;
+  final double votes;
+  @override
+  final BuiltMap<String, String> creators;
 
   factory _$ExhibitionEntity([void updates(ExhibitionEntityBuilder b)]) =>
       (new ExhibitionEntityBuilder()..update(updates)).build();
 
   _$ExhibitionEntity._(
-      {this.id, this.name, this.description, this.photos, this.votes})
+      {this.id,
+      this.name,
+      this.description,
+      this.photos,
+      this.votes,
+      this.creators})
       : super._() {
     if (id == null) {
       throw new BuiltValueNullFieldError('ExhibitionEntity', 'id');
@@ -135,15 +152,20 @@ class _$ExhibitionEntity extends ExhibitionEntity {
         name == other.name &&
         description == other.description &&
         photos == other.photos &&
-        votes == other.votes;
+        votes == other.votes &&
+        creators == other.creators;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc($jc(0, id.hashCode), name.hashCode), description.hashCode),
-            photos.hashCode),
-        votes.hashCode));
+        $jc(
+            $jc(
+                $jc($jc($jc(0, id.hashCode), name.hashCode),
+                    description.hashCode),
+                photos.hashCode),
+            votes.hashCode),
+        creators.hashCode));
   }
 
   @override
@@ -153,7 +175,8 @@ class _$ExhibitionEntity extends ExhibitionEntity {
           ..add('name', name)
           ..add('description', description)
           ..add('photos', photos)
-          ..add('votes', votes))
+          ..add('votes', votes)
+          ..add('creators', creators))
         .toString();
   }
 }
@@ -179,10 +202,15 @@ class ExhibitionEntityBuilder
       _$this._photos ??= new ListBuilder<String>();
   set photos(ListBuilder<String> photos) => _$this._photos = photos;
 
-  MapBuilder<String, int> _votes;
-  MapBuilder<String, int> get votes =>
-      _$this._votes ??= new MapBuilder<String, int>();
-  set votes(MapBuilder<String, int> votes) => _$this._votes = votes;
+  double _votes;
+  double get votes => _$this._votes;
+  set votes(double votes) => _$this._votes = votes;
+
+  MapBuilder<String, String> _creators;
+  MapBuilder<String, String> get creators =>
+      _$this._creators ??= new MapBuilder<String, String>();
+  set creators(MapBuilder<String, String> creators) =>
+      _$this._creators = creators;
 
   ExhibitionEntityBuilder();
 
@@ -192,7 +220,8 @@ class ExhibitionEntityBuilder
       _name = _$v.name;
       _description = _$v.description;
       _photos = _$v.photos?.toBuilder();
-      _votes = _$v.votes?.toBuilder();
+      _votes = _$v.votes;
+      _creators = _$v.creators?.toBuilder();
       _$v = null;
     }
     return this;
@@ -221,14 +250,16 @@ class ExhibitionEntityBuilder
               name: name,
               description: description,
               photos: _photos?.build(),
-              votes: _votes?.build());
+              votes: votes,
+              creators: _creators?.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'photos';
         _photos?.build();
-        _$failedField = 'votes';
-        _votes?.build();
+
+        _$failedField = 'creators';
+        _creators?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'ExhibitionEntity', _$failedField, e.toString());

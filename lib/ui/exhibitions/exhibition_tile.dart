@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:expo/data/models/exhibition_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expo/ui/exhibitions/exhibition_default_view.dart';
+import 'package:expo/data/repositories/user_repository.dart';
 import 'package:expo/ui/theme/theme.dart';
 
 class ExhibitionTile extends StatelessWidget {
   final ExhibitionEntity exhibition;
+  final userRepository = UserRepository();
+  final String userId;
 
-  ExhibitionTile({this.exhibition});
+  ExhibitionTile({@required this.exhibition, this.userId = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -16,31 +19,33 @@ class ExhibitionTile extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: Column(
         children: [
-          CachedNetworkImage(
-            imageUrl: exhibition.photos[1],
-            fit: BoxFit.cover,
-            height: MediaQuery.of(context).size.height / 3,
+          Hero(
+            tag: '${exhibition.id}__hero',
+            child: CachedNetworkImage(
+              imageUrl: exhibition.photos.first,
+              fit: BoxFit.cover,
+              height: MediaQuery.of(context).size.height / 3,
+            ),
           ),
           ListTile(
-            leading: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.star_half,
-                  color: Colors.yellow,
-                ),
-                Text('4.7'),
-              ],
+            leading: Hero(
+              tag: '${exhibition.id}__id',
+              child: Text(exhibition.id),
             ),
-            title: Text(exhibition.name),
-            subtitle: Text(exhibition.description),
+            title: Hero(
+              tag: '${exhibition.id}__name',
+              child: Text(exhibition.name),
+            ),
+            subtitle: Hero(
+              tag: '${exhibition.id}__description',
+              child: Text(exhibition.description ?? 'No description'),
+            ),
           ),
           ButtonTheme.bar(
             child: ButtonBar(
+              alignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Made by ${exhibition.displayName}', style: TextStyle(
-                  color: Colors.black26
-                ),),
+                _buildUserVotes(),
                 FlatButton(
                   child: Text(
                     'View',
@@ -48,8 +53,10 @@ class ExhibitionTile extends StatelessWidget {
                   ),
                   onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) =>
-                                ExhibitionDefaultView(exhibition)),
+                            builder: (context) => ExhibitionDefaultView(
+                                  exhibition,
+                                  votable: false,
+                                )),
                       ),
                 ),
               ],
@@ -57,6 +64,54 @@ class ExhibitionTile extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  double _getAverageVotes(Map<String, int> votes) {
+    int totalCount;
+    int totalWeight;
+
+    votes.forEach((key, val) {
+      totalCount += int.parse(key);
+      totalWeight += val;
+    });
+
+    return (totalWeight / totalCount);
+  }
+
+  Widget _buildUserVotes() {
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: userRepository.fetchUserVotes(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          int weight;
+          final vote = snapshot.data.firstWhere(
+              (i) => i['exhibition_id'] == exhibition.id,
+              orElse: () => {'weight': '0'});
+          weight = int.parse(vote['weight']);
+          return weight != 0
+              ? Column(
+                  children: [
+                    Text(
+                      'Your vote',
+                      style: TextStyle(color: Colors.black26),
+                    ),
+                    Row(
+                        children: [1, 2, 3, 4, 5].map((index) {
+                      return Icon(
+                        Icons.star,
+                        color:
+                            (index <= weight) ? Colors.yellow : Colors.black12,
+                        size: (index <= weight) ? 16 : 14,
+                      );
+                    }).toList()),
+                  ],
+                )
+              : Container();
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
     );
   }
 }

@@ -7,6 +7,7 @@ part 'user_model.g.dart';
 
 class UserFields {
   static const String id = 'id';
+  static const String name = 'name';
 }
 
 abstract class UserEntity extends Object
@@ -14,14 +15,18 @@ abstract class UserEntity extends Object
     implements Built<UserEntity, UserEntityBuilder> {
   String get id;
 
+  @nullable
+  String get name;
+
   factory UserEntity() {
     return _$UserEntity._(
       id: Uuid().v4(),
+      name: '',
     );
   }
 
   String get displayName {
-    return id;
+    return name;
   }
 
   int compareTo(UserEntity user, String sortField, bool sortAscending) {

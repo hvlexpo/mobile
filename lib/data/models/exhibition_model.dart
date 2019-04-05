@@ -16,6 +16,8 @@ class ExhibitionFields {
   static const String photos = 'photos';
 
   static const String votes = 'votes';
+
+  static const String creators = 'creators';
 }
 
 abstract class ExhibitionEntity extends Object
@@ -33,7 +35,10 @@ abstract class ExhibitionEntity extends Object
   BuiltList<String> get photos;
 
   @nullable
-  BuiltMap<String, int> get votes;
+  double get votes;
+
+  @nullable
+  BuiltMap<String, String> get creators;
 
   factory ExhibitionEntity() {
     return _$ExhibitionEntity._(
@@ -41,7 +46,8 @@ abstract class ExhibitionEntity extends Object
       name: '',
       description: '',
       photos: BuiltList<String>(),
-      votes: BuiltMap<String, int>(),
+      votes: 0.0,
+      creators: BuiltMap<String, String>(),
     );
   }
 
@@ -104,10 +110,6 @@ abstract class ExhibitionEntity extends Object
     }
 
     if (photos.contains(search)) {
-      return true;
-    }
-
-    if (votes.containsValue(search)) {
       return true;
     }
 

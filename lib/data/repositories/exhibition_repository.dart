@@ -12,7 +12,7 @@ import 'package:expo/constants.dart';
 class ExhibitionRepository {
   const ExhibitionRepository();
 
-  Future<BuiltList<ExhibitionEntity>> loadList() async {
+  Future<BuiltList<ExhibitionEntity>> fetchAll() async {
     final user = await FirebaseAuth.instance.currentUser();
     final token = await user.getIdToken();
 
@@ -26,7 +26,7 @@ class ExhibitionRepository {
           ),
         );
       },
-    ).catchError((error) => throw error);
+    ).catchError((error) => print(error));
   }
 
   Future<ExhibitionEntity> fetchExhibitionById(String id) async {
@@ -53,5 +53,22 @@ class ExhibitionRepository {
     }
 
     return serializers.deserializeWith(ExhibitionEntity.serializer, response);
+  }
+
+  Future<void> vote(String id, String weight) async {
+    final user = await FirebaseAuth.instance.currentUser();
+    final token = await user.getIdToken();
+
+    return await put(kApiUrl + '/votes/$id',
+        body: {'weight': weight}, headers: {'firebasetoken': token});
+  }
+
+  Future<void> removeVote(String id) async {
+    final token = await FirebaseAuth.instance.currentUser().then((user) async {
+      return await user.getIdToken();
+    }).catchError((error) => print(error));
+
+    return await delete(kApiUrl + '/votes/$id',
+        headers: {'firebasetoken': token}).catchError((error) => print(error));
   }
 }
