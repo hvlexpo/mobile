@@ -10,6 +10,7 @@ import 'package:expo/ui/exhibitions/exhibition_about_tab.dart';
 import 'package:expo/ui/exhibitions/exhibition_creator_tab.dart';
 import 'package:expo/data/repositories/exhibition_repository.dart';
 import 'package:expo/data/repositories/user_repository.dart';
+import 'package:expo/ui/exhibitions/vote_dialog.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:expo/ui/theme/theme.dart';
 
@@ -63,45 +64,7 @@ class ExhibitionDefaultView extends StatelessWidget {
                         onPressed: () async => showDialog(
                             context: context,
                             builder: (context) {
-                              return FutureBuilder<List<Map<String, dynamic>>>(
-                                future: userRepisitory.fetchUserVotes(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    final vote = snapshot.data.firstWhere((i) =>
-                                        i['exhibition_id'] == exhibition.id);
-                                    final weight = int.parse(vote['weight']);
-                                    return Center(
-                                      child: Container(
-                                        height: 250,
-                                        width: 500,
-                                        child: Card(
-                                          child: Center(
-                                            child: Row(
-                                                children: [0, 1, 2, 3, 4, 5]
-                                                    .map((index) {
-                                              return IconButton(
-                                                icon: Icon(
-                                                  Icons.star,
-                                                  color: (index < weight)
-                                                      ? Colors.yellow
-                                                      : Colors.white,
-                                                ),
-                                                onPressed: () async =>
-                                                    exhibitionRepository.vote(
-                                                        exhibition.id, index),
-                                              );
-                                            }).toList()),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  } else {
-                                    return Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  }
-                                },
-                              );
+                              return VoteDialog(context, exhibition);
                             }),
                       )
                     : Container()
