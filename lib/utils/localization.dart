@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'package:intl/intl.dart';
-import '../l10n/messages_all.dart';
-
+import 'package:expo/l10n/messages_all.dart';
 import 'dart:async';
 
 class AppLocalizations {
   static Future<AppLocalizations> load(Locale locale) {
-    final String name =
-        locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
+    final String name = locale.countryCode.isEmpty ? locale.languageCode : locale.toString();
     final String localeName = Intl.canonicalizedLocale(name);
 
     return initializeMessages(localeName).then((_) {
@@ -27,13 +24,11 @@ class AppLocalizations {
   }
 
   String get sendCode {
-    return Intl.message('Send code',
-        name: 'sendCode', desc: 'Send SMS Code');
+    return Intl.message('Send code', name: 'sendCode', desc: 'Send SMS Code');
   }
 
   String get smsCode {
-    return Intl.message('SMS code',
-        name: 'smsCode', desc: 'SMS Code');
+    return Intl.message('SMS code', name: 'smsCode', desc: 'SMS Code');
   }
 
   String get verifyCode {
@@ -50,7 +45,7 @@ class AppLocalizations {
   }
 
   String get dashboard {
-    return Intl.message('Dashboard', name:'dashboard', desc: '');
+    return Intl.message('Dashboard', name: 'dashboard', desc: '');
   }
 
   String get user {
@@ -114,21 +109,21 @@ class AppLocalizations {
   }
 
   String get submit {
-    return Intl.message('Submit', name:'submit', desc: '');
+    return Intl.message('Submit', name: 'submit', desc: '');
   }
 
   String get goBack {
-    return Intl.message('Go back',
-        name: 'goBack', desc: 'Go-back text');
+    return Intl.message('Go back', name: 'goBack', desc: 'Go-back text');
   }
 
   String get noDescription {
-    return Intl.message('No description',
-    name: 'noDescription', desc: '');
+    return Intl.message('No description', name: 'noDescription', desc: '');
   }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {
+  const AppLocalizationDelegate();
+  
   @override
   bool isSupported(Locale locale) {
     return ['en', 'no'].contains(locale.languageCode);

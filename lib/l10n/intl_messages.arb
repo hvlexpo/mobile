@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-04-05T22:04:43.622676",
+  "@@last_modified": "2019-04-05T23:41:24.254845",
   "phoneNumber": "Phone number",
   "@phoneNumber": {
     "description": "Phone number field helper text",
@@ -141,6 +141,12 @@
   "goBack": "Go back",
   "@goBack": {
     "description": "Go-back text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noDescription": "No description",
+  "@noDescription": {
+    "description": "",
     "type": "text",
     "placeholders": {}
   }

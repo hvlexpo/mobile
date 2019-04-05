@@ -20,30 +20,6 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "about" : MessageLookupByLibrary.simpleMessage("Om"),
-    "changeName" : MessageLookupByLibrary.simpleMessage("Endre navn"),
-    "creators" : MessageLookupByLibrary.simpleMessage("Deltagere"),
-    "dashboard" : MessageLookupByLibrary.simpleMessage("Oversikt"),
-    "giveYourVote" : MessageLookupByLibrary.simpleMessage("Gi din stemme"),
-    "goBack" : MessageLookupByLibrary.simpleMessage("Gå tilbake"),
-    "hello" : MessageLookupByLibrary.simpleMessage("Hei"),
-    "image" : MessageLookupByLibrary.simpleMessage("Bilde"),
-    "loggedInWith" : MessageLookupByLibrary.simpleMessage("Logget inn med"),
-    "noCodeReceived" : MessageLookupByLibrary.simpleMessage("Ikke mottatt kode?"),
-    "noCreators" : MessageLookupByLibrary.simpleMessage("Ingen deltagere"),
-    "noDescription" : MessageLookupByLibrary.simpleMessage("Ingen beskrivelse"),
-    "phoneNumber" : MessageLookupByLibrary.simpleMessage("Mobilnummer"),
-    "photos" : MessageLookupByLibrary.simpleMessage("Bilder"),
-    "removeVote" : MessageLookupByLibrary.simpleMessage("Fjern din stemme"),
-    "sendCode" : MessageLookupByLibrary.simpleMessage("Send kode"),
-    "smsCode" : MessageLookupByLibrary.simpleMessage("SMS-kode"),
-    "submit" : MessageLookupByLibrary.simpleMessage("Send"),
-    "user" : MessageLookupByLibrary.simpleMessage("Bruker"),
-    "verifyCode" : MessageLookupByLibrary.simpleMessage("Verifiser kode"),
-    "view" : MessageLookupByLibrary.simpleMessage("Se på"),
-    "vote" : MessageLookupByLibrary.simpleMessage("Stem"),
-    "yourName" : MessageLookupByLibrary.simpleMessage("Ditt navn"),
-    "yourVote" : MessageLookupByLibrary.simpleMessage("Din stemme"),
-    "yourVotes" : MessageLookupByLibrary.simpleMessage("Dine stemmer")
+
   };
 }

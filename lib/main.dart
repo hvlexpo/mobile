@@ -8,6 +8,7 @@ import 'package:expo/ui/theme/theme.dart';
 import 'package:expo/utils/routes.dart';
 import 'package:expo/utils/localization.dart';
 import 'package:fast_qr_reader_view/fast_qr_reader_view.dart';
+import 'package:expo/l10n/messages_all.dart';
 
 List<CameraDescription> cameras;
 
@@ -16,31 +17,19 @@ void main() async {
   runApp(ExpoApp());
 }
 
-class ExpoApp extends StatefulWidget {
-  @override
-  createState() => _ExpoAppState();
-}
-
-class _ExpoAppState extends State<ExpoApp> {
-  String _locale = 'no';
-
-  onLocaleChange() {
-    setState(() {
-      _locale = _locale == 'en' ? 'no' : 'en';
-    });
-  }
+class ExpoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       localizationsDelegates: [
-        AppLocalizationDelegate(),
+        const AppLocalizationDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: [
-        Locale('en', 'US'),
-        Locale('no', 'NB'),
+        const Locale('en', ''),
+        const Locale('no', ''),
       ],
       title: 'HVL Expo',
       debugShowCheckedModeBanner: false,

@@ -49,6 +49,15 @@ class _HomeScreenState extends State<HomeView> {
         centerTitle: true,
         elevation: 0.5,
         backgroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.language, color: Colors.black26,),
+            onPressed: () async =>
+                Localizations.localeOf(context).countryCode != 'no'
+                    ? AppLocalizations.load(Locale('en'))
+                    : AppLocalizations.load(Locale('no')),
+          ),
+        ],
       ),
       body: _getPage(currentPage),
       bottomNavigationBar: BottomAppBar(
