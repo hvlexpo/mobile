@@ -34,8 +34,8 @@ class _VoteDialogState extends State<VoteDialog> {
           }
           return Center(
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.25,
-              width: MediaQuery.of(context).size.width * 0.8,
+              height: 200,
+              width: 500,
               child: Card(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
