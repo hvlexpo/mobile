@@ -58,8 +58,17 @@ class ExhibitionRepository {
   Future<void> vote(String id, String weight) async {
     final user = await FirebaseAuth.instance.currentUser();
     final token = await user.getIdToken();
-    
+
     return await put(kApiUrl + '/votes/$id',
         body: {'weight': weight}, headers: {'firebasetoken': token});
+  }
+
+  Future<void> removeVote(String id) async {
+    final token = await FirebaseAuth.instance.currentUser().then((user) async {
+      return await user.getIdToken();
+    }).catchError((error) => print(error));
+
+    return await delete(kApiUrl + '/votes/$id',
+        headers: {'firebasetoken': token}).catchError((error) => print(error));
   }
 }

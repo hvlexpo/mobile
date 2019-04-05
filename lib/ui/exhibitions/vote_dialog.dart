@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:expo/data/repositories/exhibition_repository.dart';
+import 'package:expo/ui/theme/theme.dart';
 import 'package:expo/data/repositories/user_repository.dart';
 import 'package:expo/data/models/exhibition_model.dart';
 
@@ -33,11 +34,24 @@ class _VoteDialogState extends State<VoteDialog> {
           }
           return Center(
             child: Container(
-              height: 250,
-              width: 500,
+              height: MediaQuery.of(context).size.height * 0.25,
+              width: MediaQuery.of(context).size.width * 0.8,
               child: Card(
-                child: Center(
-                  child: Row(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Give your vote',
+                      style: TextStyle(
+                        color: ExpoColors.hvlAccent,
+                        fontSize: 24,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [1, 2, 3, 4, 5].map((index) {
@@ -47,13 +61,32 @@ class _VoteDialogState extends State<VoteDialog> {
                               color: (index <= weight)
                                   ? Colors.yellow
                                   : Colors.black12,
+                              size: (index <= weight) ? 28 : 18,
                             ),
                             onPressed: () async {
                               await exhibitionRepository.vote(
                                   widget.exhibition.id, index.toString());
-                                  setState(() {});
+                              setState(() {});
                             });
-                      }).toList()),
+                      }).toList(),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    FlatButton.icon(
+                      icon: Icon(
+                        Icons.remove,
+                        color: Colors.black26,
+                      ),
+                      label: Text(
+                        'Remove my vote',
+                        style: TextStyle(color: Colors.black26),
+                      ),
+                      onPressed: () async => exhibitionRepository
+                          .removeVote(widget.exhibition.id)
+                          .then((_) => setState(() {})),
+                    ),
+                  ],
                 ),
               ),
             ),
