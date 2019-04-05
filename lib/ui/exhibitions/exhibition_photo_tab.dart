@@ -92,6 +92,10 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        elevation: 0,
+      ),
       body: Container(
           decoration: widget.backgroundDecoration,
           constraints: BoxConstraints.expand(

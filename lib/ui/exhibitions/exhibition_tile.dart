@@ -19,15 +19,27 @@ class ExhibitionTile extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       child: Column(
         children: [
-          CachedNetworkImage(
-            imageUrl: exhibition.photos.first,
-            fit: BoxFit.cover,
-            height: MediaQuery.of(context).size.height / 3,
+          Hero(
+            tag: '${exhibition.id}__hero',
+            child: CachedNetworkImage(
+              imageUrl: exhibition.photos.first,
+              fit: BoxFit.cover,
+              height: MediaQuery.of(context).size.height / 3,
+            ),
           ),
           ListTile(
-            leading: Text(exhibition.id),
-            title: Text(exhibition.name),
-            subtitle: Text(exhibition.description ?? 'No description'),
+            leading: Hero(
+              tag: '${exhibition.id}__id',
+              child: Text(exhibition.id),
+            ),
+            title: Hero(
+              tag: '${exhibition.id}__name',
+              child: Text(exhibition.name),
+            ),
+            subtitle: Hero(
+              tag: '${exhibition.id}__description',
+              child: Text(exhibition.description ?? 'No description'),
+            ),
           ),
           ButtonTheme.bar(
             child: ButtonBar(
@@ -77,19 +89,25 @@ class ExhibitionTile extends StatelessWidget {
               (i) => i['exhibition_id'] == exhibition.id,
               orElse: () => {'weight': '0'});
           weight = int.parse(vote['weight']);
-          return weight != 0 ? Column(
-            children: [
-              Text('Your vote', style: TextStyle(color: Colors.black26),),
-              Row(
-                  children: [1, 2, 3, 4, 5].map((index) {
-                return Icon(
-                  Icons.star,
-                  color: (index <= weight) ? Colors.yellow : Colors.black12,
-                  size: (index <= weight) ? 16 : 14,
-                );
-              }).toList()),
-            ],
-          ) : Container();
+          return weight != 0
+              ? Column(
+                  children: [
+                    Text(
+                      'Your vote',
+                      style: TextStyle(color: Colors.black26),
+                    ),
+                    Row(
+                        children: [1, 2, 3, 4, 5].map((index) {
+                      return Icon(
+                        Icons.star,
+                        color:
+                            (index <= weight) ? Colors.yellow : Colors.black12,
+                        size: (index <= weight) ? 16 : 14,
+                      );
+                    }).toList()),
+                  ],
+                )
+              : Container();
         } else {
           return CircularProgressIndicator();
         }

@@ -44,9 +44,12 @@ class ExhibitionDefaultView extends StatelessWidget {
                   foregroundDecoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.5),
                   ),
-                  child: CachedNetworkImage(
-                    imageUrl: exhibition.photos.first,
-                    fit: BoxFit.cover,
+                  child: Hero(
+                    tag: '${exhibition.id}__hero',
+                    child: CachedNetworkImage(
+                      imageUrl: exhibition.photos.first,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
