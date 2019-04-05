@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:expo/ui/theme/theme.dart';
+import 'package:expo/utils/localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class ProfileView extends StatelessWidget {
   @override
@@ -12,7 +14,7 @@ class ProfileView extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 10, top: 10),
             child: Text(
-              'Dine stemmer',
+              'Your votes',
               style: TextStyle(color: ExpoColors.hvlAccent, fontSize: 32),
             ),
           ),

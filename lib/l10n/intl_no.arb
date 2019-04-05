@@ -1,0 +1,43 @@
+{
+    "headerText": "Dine stemmer",
+    "@headerText": {
+      "description": "description over votes",
+      "type": "text",
+      "placeholders": {}
+    },
+    "loginNumberText": "Telefonnummer",
+    "@loginNumberText": {
+      "description": "Loginpage numberfield",
+      "type": "text",
+      "placeholders": {}
+    },
+    "sendCodeButton": "Send kode",
+    "@sendCodeButton": {
+      "description": "Loginpage send code",
+      "type": "text",
+      "placeholders": {}
+    },
+    "smsCodeText": "SMS kode",
+    "@smsCodeText": {
+      "description": "Loginpage sms code",
+      "type": "text",
+      "placeholders": {}
+    },
+    "verifyCodeButton": "Vertifiser kode",
+    "@verifyCodeButton": {
+      "description": "Verifying the sms code",
+      "type": "text",
+      "placeholders": {}
+    },
+    "noCodeButton": "Ikke mottat kode?",
+    "@noCodeButton": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "goBackButton": "Tilbake",
+    "@goBackButton": {
+      "description": "button in qr-scanner",
+      "type": "text",
+      "placeholders": {}
+    }
+  }

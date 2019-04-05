@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:expo/ui/app/init.dart';
 import 'package:expo/ui/home/home_screen.dart';
 import 'package:expo/ui/auth/login.dart';
 import 'package:expo/ui/scanner/scanner.dart';
 import 'package:expo/ui/theme/theme.dart';
 import 'package:expo/utils/routes.dart';
+import 'package:expo/utils/localization.dart';
 
 void main() {
   runApp(ExpoApp());
@@ -13,16 +16,25 @@ void main() {
 class ExpoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-        return MaterialApp(
-        title: 'HVL Expo',
-        debugShowCheckedModeBanner: false,
-        theme: ExpoTheme.primaryTheme,
-        routes: {
-          Routes.login: (context) => LoginView(),
-          Routes.home: (context) => HomeView(),
-          Routes.scan: (context) => ScannerView(),
-        },
-        initialRoute: Routes.login,
-      );
+    return MaterialApp(
+      localizationsDelegates: [
+        AppLocalizationDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', ""),
+        Locale('no', ""),
+      ],
+      title: 'HVL Expo',
+      debugShowCheckedModeBanner: false,
+      theme: ExpoTheme.primaryTheme,
+      routes: {
+        Routes.login: (context) => LoginView(),
+        Routes.home: (context) => HomeView(),
+        Routes.scan: (context) => ScannerView(),
+      },
+      initialRoute: Routes.login,
+    );
   }
 }

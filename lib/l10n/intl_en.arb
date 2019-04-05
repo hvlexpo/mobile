@@ -1,0 +1,43 @@
+{
+    "headerText": "Your votes",
+    "@headerText": {
+      "description": "description over votes",
+      "type": "text",
+      "placeholders": {}
+    },
+    "loginNumberText": "Phone number",
+    "@loginNumberText": {
+      "description": "Loginpage numberfield",
+      "type": "text",
+      "placeholders": {}
+    },
+    "sendCodeButton": "Send code",
+    "@sendCodeButton": {
+      "description": "Loginpage send code",
+      "type": "text",
+      "placeholders": {}
+    },
+    "smsCodeText": "SMS code",
+    "@smsCodeText": {
+      "description": "Loginpage sms code",
+      "type": "text",
+      "placeholders": {}
+    },
+    "verifyCodeButton": "Verify code",
+    "@verifyCodeButton": {
+      "description": "Verifying the sms code",
+      "type": "text",
+      "placeholders": {}
+    },
+    "noCodeButton": "No code received?",
+    "@noCodeButton": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "goBackButton": "Go back",
+    "@goBackButton": {
+      "description": "button in qr-scanner",
+      "type": "text",
+      "placeholders": {}
+    }
+  }
