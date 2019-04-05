@@ -197,6 +197,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.3"
+  fast_qr_reader_view:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "4ed317f0ab33f28114454501f757d28905ef00b3"
+      url: "https://github.com/facundomedica/fast_qr_reader_view"
+    source: git
+    version: "0.1.5"
   file:
     dependency: transitive
     description:
@@ -406,13 +415,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.6+2"
-  native_device_orientation:
-    dependency: transitive
-    description:
-      name: native_device_orientation
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.2"
   package_config:
     dependency: transitive
     description:
@@ -504,13 +506,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-  qr_mobile_vision:
-    dependency: "direct main"
-    description:
-      name: qr_mobile_vision
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.2"
   quiver:
     dependency: transitive
     description:

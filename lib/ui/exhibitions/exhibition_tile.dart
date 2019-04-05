@@ -17,7 +17,7 @@ class ExhibitionTile extends StatelessWidget {
       child: Column(
         children: [
           CachedNetworkImage(
-            imageUrl: exhibition.photos[1],
+            imageUrl: exhibition.photos.first,
             fit: BoxFit.cover,
             height: MediaQuery.of(context).size.height / 3,
           ),
@@ -29,16 +29,16 @@ class ExhibitionTile extends StatelessWidget {
                   Icons.star_half,
                   color: Colors.yellow,
                 ),
-                Text('4.7'),
+                Text('${exhibition.votes != null ? exhibition.votes : 4.7}'),
               ],
             ),
             title: Text(exhibition.name),
-            subtitle: Text(exhibition.description),
+            subtitle: Text(exhibition.description ?? 'No description'),
           ),
           ButtonTheme.bar(
             child: ButtonBar(
               children: [
-                Text('Made by ${exhibition.displayName}', style: TextStyle(
+                Text('Made by ${exhibition.creators.values.first}', style: TextStyle(
                   color: Colors.black26
                 ),),
                 FlatButton(
@@ -49,7 +49,7 @@ class ExhibitionTile extends StatelessWidget {
                   onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(
                             builder: (context) =>
-                                ExhibitionDefaultView(exhibition)),
+                                ExhibitionDefaultView(exhibition, votable: false,)),
                       ),
                 ),
               ],
@@ -58,5 +58,17 @@ class ExhibitionTile extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  double _getAverageVotes(Map<String, int> votes) {
+    int totalCount;
+    int totalWeight;
+
+    votes.forEach((key, val) {
+      totalCount += int.parse(key);
+      totalWeight += val;
+    });
+
+    return (totalWeight / totalCount);
   }
 }

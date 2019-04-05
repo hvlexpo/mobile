@@ -15,6 +15,7 @@ abstract class UserEntity extends Object
     implements Built<UserEntity, UserEntityBuilder> {
   String get id;
 
+  @nullable
   String get name;
 
   factory UserEntity() {

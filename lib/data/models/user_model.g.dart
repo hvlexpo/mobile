@@ -20,9 +20,13 @@ class _$UserEntitySerializer implements StructuredSerializer<UserEntity> {
     final result = <Object>[
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(String)),
-      'name',
-      serializers.serialize(object.name, specifiedType: const FullType(String)),
     ];
+    if (object.name != null) {
+      result
+        ..add('name')
+        ..add(serializers.serialize(object.name,
+            specifiedType: const FullType(String)));
+    }
 
     return result;
   }
@@ -65,9 +69,6 @@ class _$UserEntity extends UserEntity {
   _$UserEntity._({this.id, this.name}) : super._() {
     if (id == null) {
       throw new BuiltValueNullFieldError('UserEntity', 'id');
-    }
-    if (name == null) {
-      throw new BuiltValueNullFieldError('UserEntity', 'name');
     }
   }
 

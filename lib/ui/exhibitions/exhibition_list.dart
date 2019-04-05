@@ -9,14 +9,14 @@ class ExhibitionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<BuiltList<ExhibitionEntity>>(
-      future: repository.loadList(),
+      future: repository.fetchAll(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return ListView.builder(
             itemCount: snapshot.data.length,
             itemBuilder: (context, index) {
               final exhibition = snapshot.data[index];
-
+              
               return Padding(
                 padding: EdgeInsets.only(bottom: 10, left: 5, right: 5),
                 child: ExhibitionTile(exhibition: exhibition));
