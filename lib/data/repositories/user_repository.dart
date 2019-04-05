@@ -17,10 +17,10 @@ class UserRepository {
         .catchError((error) => print(error));
   }
 
-  Future<void> updateUser(FirebaseUser user) async {
+  Future<void> updateUser(FirebaseUser user, {String name}) async {
     final token = await user.getIdToken();
-    return await post(kApiUrl + '/users',
-            headers: {'name': user.displayName, 'firebasetoken': token})
+    return await put(kApiUrl + '/users',
+            headers: {'name': user.displayName, 'firebasetoken': token}, body: {'name': name})
         .catchError((error) => print(error));
   }
 
