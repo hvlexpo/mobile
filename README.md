@@ -46,7 +46,13 @@ For pull requests to be merged into master they must be reviewed and pass all th
 
 ## Installation
 
-Information on how to download and install/run web and mobile clients.
+Make sure the [Flutter SDK](https://flutter.dev/docs/get-started/install) is installed.
+1. Navigate to the root folder
+2. Run `flutter packages get`
+3. Make sure you have an iOS or Android device or emulator installed. For Android, the Android SDK is required. For iOS, Xcode is required
+4. Run `flutter run`
+
+If you're not in the Apple Developer team, run `flutter run --no-codesign` to skip signing.
 
 ## Progress
 
@@ -57,7 +63,7 @@ Information on how to download and install/run web and mobile clients.
 | 11            | Second iteration; architecture      | ✅    |
 | 12            | Third iteration; implementation     | ✅    |
 | 13            | Fourth iteration; implementation    | ✅    |
-| 14            | Presentation and summary            | 🔄    |
+| 14            | Presentation and summary            | ✅    |
 
 ## Credits
 
