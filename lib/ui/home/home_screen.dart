@@ -6,6 +6,7 @@ import 'package:expo/ui/profile/profile_view.dart';
 import 'package:expo/ui/exhibitions/exhibition_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:groovin_material_icons/groovin_material_icons.dart';
+import 'package:expo/utils/localization.dart';
 
 class HomeView extends StatefulWidget {
   static final String route = '/home';
@@ -22,8 +23,7 @@ class _HomeScreenState extends State<HomeView> {
   void initState() {
     super.initState();
     authListener = FirebaseAuth.instance.onAuthStateChanged.listen((user) {
-      if(user != null) {
-
+      if (user != null) {
       } else {
         Navigator.of(context).popAndPushNamed(Routes.login);
       }
@@ -49,6 +49,15 @@ class _HomeScreenState extends State<HomeView> {
         centerTitle: true,
         elevation: 0.5,
         backgroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.language, color: Colors.black26,),
+            onPressed: () async =>
+                Localizations.localeOf(context).countryCode != 'no'
+                    ? AppLocalizations.load(Locale('en'))
+                    : AppLocalizations.load(Locale('no')),
+          ),
+        ],
       ),
       body: _getPage(currentPage),
       bottomNavigationBar: BottomAppBar(
@@ -58,7 +67,7 @@ class _HomeScreenState extends State<HomeView> {
           Padding(
             padding: EdgeInsets.only(left: 50),
             child: IconButton(
-              tooltip: 'Dashboard',
+              tooltip: AppLocalizations.of(context).dashboard,
               icon: Icon(
                 Icons.dashboard,
                 color: currentPage == 0
@@ -75,7 +84,7 @@ class _HomeScreenState extends State<HomeView> {
           Padding(
             padding: EdgeInsets.only(right: 50),
             child: IconButton(
-              tooltip: 'Settings',
+              tooltip: AppLocalizations.of(context).user,
               icon: Icon(
                 GroovinMaterialIcons.account_settings,
                 color: currentPage == 1

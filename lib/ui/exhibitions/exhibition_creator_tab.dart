@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:expo/data/models/exhibition_model.dart';
+import 'package:expo/utils/localization.dart';
 
 class CreatorTab extends StatelessWidget {
   final ExhibitionEntity exhibition;
@@ -25,7 +26,7 @@ class CreatorTab extends StatelessWidget {
                   )
                   .toList())
           : ListTile(
-              leading: Text('No creators'),
+              leading: Text(AppLocalizations.of(context).noCreators),
             ),
     );
   }

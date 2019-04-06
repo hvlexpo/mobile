@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:expo/ui/theme/theme.dart';
+import 'package:expo/utils/localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:expo/ui/exhibitions/exhibition_tile.dart';
 import 'package:expo/ui/exhibitions/exhibition_default_view.dart';
@@ -8,6 +10,7 @@ import 'package:expo/data/models/exhibition_model.dart';
 import 'package:expo/data/models/user_model.dart';
 import 'package:expo/data/repositories/user_repository.dart';
 import 'package:expo/data/repositories/exhibition_repository.dart';
+import 'package:expo/utils/localization.dart';
 
 class ProfileView extends StatelessWidget {
   final userRepository = UserRepository();
@@ -39,7 +42,7 @@ class ProfileView extends StatelessWidget {
                       color: Colors.black26,
                     ),
                     label: Text(
-                      'Change name',
+                      AppLocalizations.of(context).changeName,
                       style: TextStyle(color: Colors.black26),
                     ),
                     onPressed: () => showDialog(
@@ -63,12 +66,12 @@ class ProfileView extends StatelessWidget {
                                             color: ExpoColors.hvlAccent),
                                         decoration: InputDecoration(
                                           filled: true,
-                                          helperText: 'Your name'
+                                          helperText: AppLocalizations.of(context).yourName
                                         ),
                                       ),
                                       FlatButton.icon(
                                         icon: Icon(Icons.check, color: ExpoColors.hvlAccent,),
-                                        label: Text('Submit', style: TextStyle(
+                                        label: Text(AppLocalizations.of(context).submit, style: TextStyle(
                                           color: ExpoColors.hvlAccent,
                                         ),),
                                         onPressed: () async {
@@ -77,6 +80,7 @@ class ProfileView extends StatelessWidget {
                                           info.displayName = nameController.text;
                                           await user.updateProfile(info);
                                           await userRepository.updateUser(user, name: info.displayName);
+                                          Navigator.pop(context);
                                         },
                                       )
                                     ],
@@ -91,7 +95,7 @@ class ProfileView extends StatelessWidget {
                     height: 25,
                   ),
                   Text(
-                    'Your votes',
+                    AppLocalizations.of(context).yourVotes,
                     style: TextStyle(
                         color: ExpoColors.hvlAccent,
                         fontSize: 32,
@@ -175,7 +179,7 @@ class ProfileView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Your vote',
+                      AppLocalizations.of(context).yourVote,
                       style: TextStyle(color: Colors.black26),
                     ),
                     Row(

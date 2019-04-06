@@ -101,7 +101,7 @@ PODS:
 DEPENDENCIES:
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
-  - Flutter (from `.symlinks/flutter/ios-release`)
+  - Flutter (from `.symlinks/flutter/ios`)
   - local_auth (from `.symlinks/plugins/local_auth/ios`)
   - native_device_orientation (from `.symlinks/plugins/native_device_orientation/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
@@ -132,7 +132,7 @@ EXTERNAL SOURCES:
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   Flutter:
-    :path: ".symlinks/flutter/ios-release"
+    :path: ".symlinks/flutter/ios"
   local_auth:
     :path: ".symlinks/plugins/local_auth/ios"
   native_device_orientation:
@@ -148,29 +148,29 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Firebase: c60d49e9c2630875a96207d15e2affb8364996d1
-  firebase_auth: 02ced56521bc9f220d40edda27b1ec5a2fcdf01e
-  firebase_core: ce5006bb48508ee4e71e0f429a3f519bb8ee2961
+  firebase_auth: a5b249720380ab4ee1c633368cbb84aac9959359
+  firebase_core: c96aa8b2fcf7f5167d32f22034f502f9304952b8
   FirebaseAnalytics: fd72a26bf8dac84cefba2f0864366f718555a5b0
   FirebaseAuth: cbb892a66baed025efc179372598941252acf853
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: 22a79a961c3951ef2f77b67bfbc99e454247b319
   FirebaseInstanceID: cf488df2f4b79782f0e430b04a0e17c0aa7979b2
-  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GoogleAppMeasurement: 1624046ab1bcc5e170061a56ef5679000b079c8e
   GoogleMobileVision: a1f93108b3527d67339e2de80e1db76645f9e8b9
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GoogleUtilities: 6481e6318c5fcabaaa8513ef8120f329055d7c10
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
-  local_auth: 17f985934bb4ab2637431e5b3fe1b2d6698d2051
+  local_auth: dca7d49d2228a53db258478ee98ee19402ff0c49
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  native_device_orientation: e24d00be281de72996640885d80e706142707660
-  path_provider: f96fff6166a8867510d2c25fdcc346327cc4b259
+  native_device_orientation: bdddf1f910b21fd829cdf8d1181bcbcf1c9583b5
+  path_provider: 09407919825bfe3c2deae39453b7a5b44f467873
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
-  qr_mobile_vision: be1c3c9f00796683610e8bab9bbab2920dd4ffca
-  shared_preferences: 1feebfa37bb57264736e16865e7ffae7fc99b523
-  sqflite: ff1d9da63c06588cc8d1faf7256d741f16989d5a
+  qr_mobile_vision: 245b97161167cbe4865327b9cc4741f7f0897878
+  shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
+  sqflite: d1612813fa7db7c667bed9f1d1b508deffc56999
 
 PODFILE CHECKSUM: b02606947baaf3e07fcd71cb6f0c6149fcdf6bf2
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.5.3

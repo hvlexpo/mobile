@@ -9,6 +9,7 @@ import 'package:expo/ui/exhibitions/exhibition_photo_tab.dart';
 import 'package:expo/ui/exhibitions/exhibition_about_tab.dart';
 import 'package:expo/ui/exhibitions/exhibition_creator_tab.dart';
 import 'package:expo/data/repositories/exhibition_repository.dart';
+import 'package:expo/utils/localization.dart';
 import 'package:expo/data/repositories/user_repository.dart';
 import 'package:expo/ui/exhibitions/vote_dialog.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -61,7 +62,7 @@ class ExhibitionDefaultView extends StatelessWidget {
                           color: Colors.white,
                         ),
                         label: Text(
-                          'Vote',
+                          AppLocalizations.of(context).vote,
                           style: TextStyle(color: Colors.white),
                         ),
                         onPressed: () async => showDialog(
@@ -90,7 +91,7 @@ class ExhibitionDefaultView extends StatelessWidget {
                     },
                   ),
                 ),
-                _buildTabBar(),
+                _buildTabBar(context),
               ],
             ),
           ),
@@ -99,7 +100,7 @@ class ExhibitionDefaultView extends StatelessWidget {
     );
   }
 
-  Widget _buildTabBar({bool showFirstOption}) {
+  Widget _buildTabBar(BuildContext context, {bool showFirstOption}) {
     return Stack(
       children: <Widget>[
         Positioned.fill(
@@ -113,9 +114,9 @@ class ExhibitionDefaultView extends StatelessWidget {
           indicatorWeight: 2,
           indicatorColor: ExpoColors.hvlAccent,
           tabs: <Widget>[
-            Tab(text: 'About'),
-            Tab(text: 'Creators'),
-            Tab(text: 'Photos'),
+            Tab(text: AppLocalizations.of(context).about),
+            Tab(text: AppLocalizations.of(context).creators),
+            Tab(text: AppLocalizations.of(context).photos),
           ],
           labelColor: Colors.black45,
           unselectedLabelColor: Colors.grey,

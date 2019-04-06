@@ -6,7 +6,7 @@ class ExpoTheme {
     return ThemeData(
         primaryColor: Color(0xFF176C89),
         accentColor: Color(0xFF00AEBA),
-        splashColor: Color(0xFF176C89),
+        splashColor: Color(0xFF00AEBA),
         hintColor: Color(0xFF00AEBA),
         fontFamily: 'Akademie');
   }

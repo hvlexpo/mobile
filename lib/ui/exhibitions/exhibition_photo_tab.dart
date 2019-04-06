@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:expo/utils/localization.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -119,7 +120,7 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
               Container(
                 padding: const EdgeInsets.all(20.0),
                 child: Text(
-                  "Image ${currentIndex + 1}",
+                  "${AppLocalizations.of(context).image} ${currentIndex + 1}",
                   style: const TextStyle(
                       color: Colors.white, fontSize: 17.0, decoration: null),
                 ),

@@ -3,7 +3,7 @@ import 'package:expo/ui/theme/theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:expo/data/repositories/user_repository.dart';
 import 'package:expo/utils/routes.dart';
-
+import 'package:expo/utils/localization.dart';
 class LoginView extends StatefulWidget {
   LoginView({
     Key key,
@@ -56,7 +56,7 @@ class _LoginState extends State<LoginView> {
                 style: TextStyle(fontSize: 32, color: ExpoColors.hvlAccent),
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
-                  helperText: 'Phone number',
+                  helperText: AppLocalizations.of(context).phoneNumber,
                   filled: true,
                   prefix: Text('+47'),
                 ),
@@ -71,7 +71,7 @@ class _LoginState extends State<LoginView> {
                           TextStyle(fontSize: 32, color: ExpoColors.hvlAccent),
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
-                        helperText: 'SMS Code',
+                        helperText: AppLocalizations.of(context).smsCode,
                         filled: true,
                       ),
                     ),
@@ -83,7 +83,7 @@ class _LoginState extends State<LoginView> {
                 color: ExpoColors.hvlAccent,
               ),
               label: Text(
-                codeSent ? 'Verify code' : 'Send code',
+                codeSent ? AppLocalizations.of(context).verifyCode : AppLocalizations.of(context).sendCode,
                 style: TextStyle(color: ExpoColors.hvlAccent),
               ),
               onPressed: () async => codeSent
@@ -92,9 +92,9 @@ class _LoginState extends State<LoginView> {
             ),
             codeSent
                 ? FlatButton.icon(
-                    icon: Icon(Icons.refresh),
+                    icon: Icon(Icons.refresh, color: ExpoColors.hvlAccent,),
                     label: Text(
-                      'No code received?',
+                      AppLocalizations.of(context).noCodeReceived,
                       style: TextStyle(color: ExpoColors.hvlAccent),
                     ),
                     onPressed: () => setState(() {
@@ -102,15 +102,6 @@ class _LoginState extends State<LoginView> {
                         }),
                   )
                 : Container(),
-            /*FlatButton.icon(
-              icon: Icon(GroovinMaterialIcons.fire, color: ExpoColors.hvlAccent),
-              label: Text('Debug login', style: TextStyle(color: ExpoColors.hvlAccent),),
-              onPressed: () async {
-                await FirebaseAuth.instance.signInAnonymously().then((user) {
-                  Navigator.of(context).popAndPushNamed(Routes.home);
-                });
-              },
-            )*/
           ],
         ),
       ),
@@ -129,7 +120,7 @@ class _LoginState extends State<LoginView> {
         .then((user) async {
       _scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text(
-          'Logged in with ${user.phoneNumber}',
+          '${AppLocalizations.of(context).loggedInWith} ${user.phoneNumber}',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: ExpoColors.hvlAccent,

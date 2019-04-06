@@ -1,0 +1,153 @@
+{
+  "@@last_modified": "2019-04-05T22:04:43.622676",
+  "phoneNumber": "Phone number",
+  "@phoneNumber": {
+    "description": "Phone number field helper text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sendCode": "Send code",
+  "@sendCode": {
+    "description": "Send SMS Code",
+    "type": "text",
+    "placeholders": {}
+  },
+  "smsCode": "SMS code",
+  "@smsCode": {
+    "description": "SMS Code",
+    "type": "text",
+    "placeholders": {}
+  },
+  "verifyCode": "Verify code",
+  "@verifyCode": {
+    "description": "Verify the SMS code",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCodeReceived": "No code received?",
+  "@noCodeReceived": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loggedInWith": "Logged in with",
+  "@loggedInWith": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dashboard": "Dashboard",
+  "@dashboard": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "user": "User",
+  "@user": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "view": "View",
+  "@view": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "yourVote": "Your vote",
+  "@yourVote": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "yourVotes": "Your votes",
+  "@yourVotes": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "giveYourVote": "Give your vote",
+  "@giveYourVote": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "removeVote": "Remove your vote",
+  "@removeVote": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "vote": "Vote",
+  "@vote": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "about": "About",
+  "@about": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "creators": "Creators",
+  "@creators": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCreators": "No creators",
+  "@noCreators": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "photos": "Photos",
+  "@photos": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "image": "Image",
+  "@image": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hello": "Hello",
+  "@hello": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "changeName": "Change name",
+  "@changeName": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "yourName": "Your name",
+  "@yourName": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "submit": "Submit",
+  "@submit": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "goBack": "Go back",
+  "@goBack": {
+    "description": "Go-back text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noDescription": "No description",
+  "@noDescription": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  }
+}

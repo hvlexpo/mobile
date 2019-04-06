@@ -1,0 +1,153 @@
+{
+  "@@last_modified": "2019-04-05T22:04:43.622676",
+  "phoneNumber": "Mobilnummer",
+  "@phoneNumber": {
+    "description": "Phone number field helper text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sendCode": "Send kode",
+  "@sendCode": {
+    "description": "Send SMS Code",
+    "type": "text",
+    "placeholders": {}
+  },
+  "smsCode": "SMS-kode",
+  "@smsCode": {
+    "description": "SMS Code",
+    "type": "text",
+    "placeholders": {}
+  },
+  "verifyCode": "Verifiser kode",
+  "@verifyCode": {
+    "description": "Verify the SMS code",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCodeReceived": "Ikke mottatt kode?",
+  "@noCodeReceived": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loggedInWith": "Logget inn med",
+  "@loggedInWith": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "dashboard": "Oversikt",
+  "@dashboard": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "user": "Bruker",
+  "@user": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "view": "Se på",
+  "@view": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "yourVote": "Din stemme",
+  "@yourVote": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "yourVotes": "Dine stemmer",
+  "@yourVotes": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "giveYourVote": "Gi din stemme",
+  "@giveYourVote": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "removeVote": "Fjern din stemme",
+  "@removeVote": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "vote": "Stem",
+  "@vote": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "about": "Om",
+  "@about": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "creators": "Deltagere",
+  "@creators": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCreators": "Ingen deltagere",
+  "@noCreators": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "photos": "Bilder",
+  "@photos": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "image": "Bilde",
+  "@image": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hello": "Hei",
+  "@hello": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "changeName": "Endre navn",
+  "@changeName": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "yourName": "Ditt navn",
+  "@yourName": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "submit": "Send",
+  "@submit": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "goBack": "Gå tilbake",
+  "@goBack": {
+    "description": "Go-back text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noDescription": "Ingen beskrivelse",
+  "@noDescription": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  }
+}
