@@ -13,10 +13,6 @@ build/
 
 bin/
 
-# firebase
-google-services.json
-GoogleService-Info.plist
-
 # eclipse 😤
 org.eclipse.buildship.core.prefs
 .project
